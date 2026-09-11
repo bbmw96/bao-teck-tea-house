@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-page-title-key="menu.meta.title">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4ece0">
+<title>Bao Teck Tea House</title>
+<meta name="description" data-i18n-content="menu.meta.description" content="Dim sum and fine tea in a George Town shophouse.">
+<link rel="canonical" href="https://www.baoteckteahouse.com/pages/menu.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bao Teck Tea House">
+<meta property="og:title" data-i18n-content="menu.meta.title" content="Bao Teck Tea House">
+<meta property="og:description" data-i18n-content="menu.meta.description" content="">
+<meta property="og:image" content="../images/og/og-menu.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="../images/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../images/brand/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Kufi+Arabic:wght@600;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Serif+Thai:wght@500;700&family=Noto+Sans+Tamil:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../assets/css/design-system.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/motion.css">
+<link rel="stylesheet" href="../assets/css/peranakan.css">
+<script src="../content/shared.js"></script>
+<script src="../content/languages/en.js"></script>
+<script src="../content/languages/ms.js"></script>
+<script src="../content/languages/zh-Hans.js"></script>
+<script src="../content/languages/zh-Hant.js"></script>
+<script src="../content/languages/ar.js"></script>
+<script src="../content/languages/th.js"></script>
+<script src="../content/languages/ta.js"></script>
+</head>
+
+<body data-room="menu">
+
+<div class="loader" role="status" aria-live="polite">
+  <span class="visually-hidden" data-i18n="common.loading">Loading</span>
+  <div class="loader__panel loader__panel--l" aria-hidden="true"></div>
+  <div class="loader__panel loader__panel--r" aria-hidden="true"></div>
+  <div class="loader__arch" aria-hidden="true">
+    <img src="../assets/svg/logo-wordmark-gilt.svg" alt="" width="332" height="104">
+  </div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"></div>
+<a class="skip-link" href="#main" data-i18n="nav.skipToContent">Skip to main content</a>
+<header class="site-header" data-site-header></header>
+
+<div data-scroll-root>
+<main id="main">
+
+  <section class="room-hero" data-steam-field>
+    <div class="tiles" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="room-hero__grid">
+        <div class="reveal stack" style="--flow:var(--space-m)">
+          <p class="room-hero__cn" lang="zh-Hant" aria-hidden="true">蒸籠</p>
+          <p class="eyebrow" data-i18n="menu.hero.eyebrow"></p>
+          <h1 data-split data-i18n="menu.hero.title"></h1>
+          <p class="lead" data-i18n="menu.hero.lead"></p>
+        </div>
+        <div class="room-hero__art">
+          <div class="frame" data-reveal-image style="aspect-ratio:5/4">
+          <div class="art-placeholder" aria-hidden="true"><span>點</span></div>
+          <img src="../images/hero/hero-menu.jpg" alt="" data-i18n-alt="menu.hero.title" data-glyph="點"
+               loading="lazy" decoding="async" width="1000" height="1250">
+        </div>
+          <span class="seal" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="threshold threshold--thin" aria-hidden="true"></div>
+
+  <!-- ═══ THE STEAMER: baskets, with steam coming off them ═══
+       On desktop, with motion allowed, the catalogue is pinned and the
+       baskets pan sideways as you scroll down through it: a steamer trolley
+       wheeled past, rather than a page you scroll through. See
+       assets/js/menu-rail.js. Everything the mechanic needs (the dish
+       cards, their text, their images) is built by site.js's buildMenu()
+       exactly as before; the rail only adds a transform on top of real,
+       already-visible content, so a phone, reduced motion, or JS failing
+       outright all fall back to the plain grid below with nothing missing. -->
+  <section class="section" style="padding-block-start:var(--space-xl)">
+    <div class="wrap">
+      <p class="text-sm text-muted" style="text-align:center;margin-block-end:var(--space-m)">
+        <span class="hint-hover" data-i18n="menu.hint"></span>
+        <span class="hint-touch" data-i18n="menu.hintTouch"></span>
+      </p>
+      <!-- The filter bar is already sticky (motion.css, "Sticky filter bar
+           on the menu"). Left in the same .wrap as the rail below, it stays
+           parked near the top of the screen for the rail's whole pinned
+           scroll too, so a category can be swapped mid-pan without ever
+           scrolling back up, no extra code, it was already built that way. -->
+      <div class="menu-filters" role="group" data-menu-filters></div>
+
+      <div class="menu-rail" data-menu-rail>
+        <div class="menu-rail__pin">
+          <div class="steam-stage" data-steam>
+            <div class="dish-grid reveal-child" data-menu-grid></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack" style="--flow:var(--space-s);margin-block-start:var(--space-2xl);max-inline-size:52rem;margin-inline:auto">
+        <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6v.6"/></svg>
+          <p data-i18n="menu.priceNote" style="max-inline-size:none"></p></div>
+        <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 9v4M12 16v.6"/></svg>
+          <p data-i18n="menu.allergyNote" style="max-inline-size:none"></p></div>
+        <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 9v4M12 16v.6"/></svg>
+          <p data-i18n="menu.porkNote" style="max-inline-size:none"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="airbrick-bg" aria-hidden="true"></div>
+    <div class="wrap-narrow" style="text-align:center">
+      <div class="reveal stack" style="--flow:var(--space-m)">
+        <p class="eyebrow" style="justify-content:center" data-i18n="home.tea.eyebrow"></p>
+        <h2 data-split data-i18n="home.tea.title"></h2>
+        <p class="lead" style="margin-inline:auto" data-i18n="home.tea.body"></p>
+        <p class="cluster" style="justify-content:center">
+          <a class="btn btn--accent" href="tea.html" data-magnetic="0.28" data-i18n="home.tea.cta"></a>
+          <a class="btn btn--whatsapp" data-whatsapp-link href="#" data-magnetic="0.28"><span data-i18n="common.bookTable"></span></a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer class="site-footer" data-site-footer></footer>
+</div>
+
+<button class="icon-btn to-top" type="button" data-i18n-aria-label="nav.backToTop">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/motion.js"></script>
+<script src="../assets/js/steam.js"></script>
+<script src="../assets/js/menu-rail.js"></script>
+<script src="../assets/js/rooms.js"></script>
+</body>
+</html>

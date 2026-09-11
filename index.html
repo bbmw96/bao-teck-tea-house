@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-page-title-key="home.meta.title">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4ece0">
+<title>Bao Teck Tea House</title>
+<meta name="description" data-i18n-content="home.meta.description" content="Dim sum and fine tea in a George Town shophouse.">
+<link rel="canonical" href="https://www.baoteckteahouse.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bao Teck Tea House">
+<meta property="og:title" data-i18n-content="home.meta.title" content="Bao Teck Tea House">
+<meta property="og:description" data-i18n-content="home.meta.description" content="">
+<meta property="og:image" content="images/og/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="images/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Kufi+Arabic:wght@600;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Serif+Thai:wght@500;700&family=Noto+Sans+Tamil:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="assets/css/design-system.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/motion.css">
+<link rel="stylesheet" href="assets/css/peranakan.css">
+<script src="content/shared.js"></script>
+<script src="content/languages/en.js"></script>
+<script src="content/languages/ms.js"></script>
+<script src="content/languages/zh-Hans.js"></script>
+<script src="content/languages/zh-Hant.js"></script>
+<script src="content/languages/ar.js"></script>
+<script src="content/languages/th.js"></script>
+<script src="content/languages/ta.js"></script>
+</head>
+
+<body data-room="home">
+
+<div class="loader" role="status" aria-live="polite">
+  <span class="visually-hidden" data-i18n="common.loading">Loading</span>
+  <div class="loader__panel loader__panel--l" aria-hidden="true"></div>
+  <div class="loader__panel loader__panel--r" aria-hidden="true"></div>
+  <div class="loader__arch" aria-hidden="true">
+    <img src="assets/svg/logo-wordmark-gilt.svg" alt="" width="332" height="104">
+  </div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"></div>
+<a class="skip-link" href="#main" data-i18n="nav.skipToContent">Skip to main content</a>
+<header class="site-header" data-site-header></header>
+
+<div data-scroll-root>
+<main id="main">
+
+  <!-- ═══ THE FIVE-FOOT WAY: you arrive under the arcade ═══
+       The push into the moss garden is real footage the owner sent us: a
+       single continuous camera move, cut to nineteen and a half seconds
+       and graded to match the room. Scrolling scrubs it frame by frame,
+       so the visitor drives the arrival rather than watching it autoplay.
+       Everything below is unchanged from a normal hero: the poster image
+       paints first, the text is real DOM in normal flow, and a phone or a
+       reduced-motion visitor simply gets the poster with no video at all. -->
+  <section class="hero-scrub" data-hero-scrub>
+    <div class="hero five-foot-way">
+      <div class="hero__bg">
+        <div class="art-placeholder" aria-hidden="true"><span>包</span></div>
+        <video class="hero__scrub-video" data-scrub-video muted playsinline preload="none"
+               poster="assets/video/home-poster.jpg"
+               width="1180" height="664" aria-hidden="true">
+          <source src="assets/video/home-scrub.mp4" type="video/mp4">
+        </video>
+        <picture data-scrub-poster>
+          <source srcset="assets/video/home-poster-mobile.webp" media="(max-width: 61rem)" type="image/webp">
+          <source srcset="assets/video/home-poster-mobile.jpg" media="(max-width: 61rem)">
+          <source srcset="assets/video/home-poster.webp" type="image/webp">
+          <img src="assets/video/home-poster.jpg" alt="" data-i18n-alt="home.hero.alt"
+               fetchpriority="high" width="1600" height="900">
+        </picture>
+      </div>
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <!-- a soft band so the wording stays readable whatever photograph
+           the owner puts behind it -->
+      <div class="hero__text-ground" aria-hidden="true"></div>
+      <div class="arch-mask" aria-hidden="true"></div>
+
+      <div class="wrap hero__content">
+        <p class="hero__cn" lang="zh-Hant" data-name-cn aria-hidden="true"></p>
+        <p class="eyebrow" data-i18n="home.hero.eyebrow"></p>
+        <h1 data-split data-i18n="home.hero.title"></h1>
+        <p class="hero__lead" data-i18n="home.hero.lead"></p>
+        <div class="hero__actions">
+          <a class="btn btn--accent btn--lg" href="pages/menu.html" data-magnetic="0.3" data-i18n="common.viewMenu"></a>
+          <a class="btn btn--whatsapp btn--lg" data-whatsapp-link href="#" data-magnetic="0.3"><span data-i18n="common.bookTable"></span></a>
+        </div>
+
+        <!-- Inside the content wrapper on purpose. As a sibling it lined up with
+             nothing, because the wrapper carries insets of its own. -->
+        <div class="hero__meta">
+          <p><span class="badge" data-open-status></span></p>
+          <p><span data-address></span></p>
+        </div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true">
+        <span data-i18n="home.hero.scrollHint"></span><span class="scroll-cue__line"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="threshold" aria-hidden="true"></div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track"><span class="marquee__item" data-i18n="home.marquee.item1"></span><span class="marquee__item" data-i18n="home.marquee.item2"></span><span class="marquee__item" data-i18n="home.marquee.item3"></span><span class="marquee__item" data-i18n="home.marquee.item4"></span><span class="marquee__item" data-i18n="home.marquee.item5"></span><span class="marquee__item" data-i18n="home.marquee.item6"></span><span class="marquee__item" data-i18n="home.marquee.item1"></span><span class="marquee__item" data-i18n="home.marquee.item2"></span><span class="marquee__item" data-i18n="home.marquee.item3"></span><span class="marquee__item" data-i18n="home.marquee.item4"></span><span class="marquee__item" data-i18n="home.marquee.item5"></span><span class="marquee__item" data-i18n="home.marquee.item6"></span></div>
+  </div>
+
+  <!-- ═══ THE FRONT HALL ═══ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="hall-grid">
+        <div class="reveal reveal--left">
+          <p class="eyebrow" data-i18n="home.intro.eyebrow"></p>
+          <h2 data-split data-i18n="home.intro.title"></h2>
+          <span class="seal seal--lg" aria-hidden="true" style="margin-block-start:var(--space-l);display:block"></span>
+        </div>
+        <div class="reveal reveal--right stack" style="--flow:var(--space-m)">
+          <p class="lead" data-i18n="home.intro.body"></p>
+          <p data-i18n="home.intro.body2"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHAT ARRIVES FIRST ═══ -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <div class="section-head section-head--center reveal">
+        <p class="eyebrow" data-i18n="home.signature.eyebrow"></p>
+        <h2 data-split data-i18n="home.signature.title"></h2>
+        <p class="lead" data-i18n="home.signature.lead"></p>
+        <div class="cloud-rule" aria-hidden="true" style="margin-block-start:var(--space-m)"></div>
+      </div>
+      <div class="dish-grid reveal-child" data-menu-grid data-limit="5"></div>
+      <p style="text-align:center;margin-block-start:var(--space-2xl)">
+        <a class="btn" href="pages/menu.html" data-magnetic="0.28" data-i18n="home.signature.cta"></a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ THE AIRWELL, GLIMPSED ═══ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="split-grid split-grid--center">
+        <div><div class="frame" data-reveal-image style="aspect-ratio:4/5">
+          <div class="art-placeholder" aria-hidden="true"><span>苔</span></div>
+          <img src="images/venue/moss-garden.jpg" alt="" data-i18n-alt="home.moss.alt" data-glyph="苔"
+               loading="lazy" decoding="async" width="1000" height="1250">
+        </div></div>
+        <div class="reveal reveal--right stack" style="--flow:var(--space-m)">
+          <p class="eyebrow" data-i18n="home.moss.eyebrow"></p>
+          <h2 data-split data-i18n="home.moss.title"></h2>
+          <p class="lead" data-i18n="home.moss.body"></p>
+          <p data-i18n="home.moss.body2"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="airbrick-bg" aria-hidden="true"></div>
+    <div class="wrap"><div class="grid grid-4 reveal-child" data-stats></div></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="bento reveal-child">
+        <article class="feature bento__lg" data-tilt="4">
+          <span class="feature__num" aria-hidden="true">茶</span>
+          <p class="eyebrow" data-i18n="home.tea.eyebrow"></p>
+          <h3 style="font-size:var(--step-3)" data-i18n="home.tea.title"></h3>
+          <p class="text-muted" style="margin-block:var(--space-2xs) var(--space-s)" data-i18n="home.tea.body"></p>
+          <p><a class="link-underline" href="pages/tea.html" data-i18n="home.tea.cta"></a></p>
+        </article>
+        <article class="feature bento__sm" data-tilt="4">
+          <span class="feature__num" aria-hidden="true">茗</span>
+          <p class="eyebrow" data-i18n="home.highTea.eyebrow"></p>
+          <h3 data-i18n="home.highTea.title"></h3>
+          <p class="text-muted text-sm" style="margin-block:var(--space-2xs) var(--space-s)" data-i18n="home.highTea.body"></p>
+          <p><a class="link-underline" href="pages/menu.html" data-i18n="home.highTea.cta"></a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="threshold threshold--thin" aria-hidden="true"></div>
+
+  <section class="section section--alt">
+    <div class="wrap">
+      <div class="section-head section-head--center reveal">
+        <p class="eyebrow" data-i18n="home.reviews.eyebrow"></p>
+        <h2 data-split data-i18n="home.reviews.title"></h2>
+      </div>
+      <div class="grid grid-3 reveal-child">
+        <figure class="quote"><p class="quote__stars" aria-hidden="true">★★★★★</p>
+          <blockquote class="quote__text" data-i18n="quotes.q1.text"></blockquote>
+          <figcaption class="quote__by" data-i18n="quotes.q1.by"></figcaption></figure>
+        <figure class="quote"><p class="quote__stars" aria-hidden="true">★★★★★</p>
+          <blockquote class="quote__text" data-i18n="quotes.q2.text"></blockquote>
+          <figcaption class="quote__by" data-i18n="quotes.q2.by"></figcaption></figure>
+        <figure class="quote"><p class="quote__stars" aria-hidden="true">★★★★★</p>
+          <blockquote class="quote__text" data-i18n="quotes.q3.text"></blockquote>
+          <figcaption class="quote__by" data-i18n="quotes.q3.by"></figcaption></figure>
+      </div>
+      <p class="text-sm text-muted" style="text-align:center;margin-block-start:var(--space-m)" data-i18n="home.reviews.note"></p>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="airbrick-bg" aria-hidden="true"></div>
+    <div class="wrap-narrow" style="text-align:center">
+      <div class="reveal stack" style="--flow:var(--space-m)">
+        <p class="eyebrow" style="justify-content:center" data-i18n="home.visitCta.eyebrow"></p>
+        <h2 data-split data-i18n="home.visitCta.title"></h2>
+        <p class="lead" style="margin-inline:auto" data-i18n="home.visitCta.body"></p>
+        <p class="cluster" style="justify-content:center;margin-block-start:var(--space-m)">
+          <a class="btn btn--accent" href="pages/visit.html" data-magnetic="0.28" data-i18n="home.visitCta.cta"></a>
+          <a class="btn btn--whatsapp" data-whatsapp-link href="#" data-magnetic="0.28"><span data-i18n="common.whatsapp"></span></a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer class="site-footer" data-site-footer></footer>
+</div>
+
+<button class="icon-btn to-top" type="button" data-i18n-aria-label="nav.backToTop">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/motion.js"></script>
+<script src="assets/js/steam.js"></script>
+<script src="assets/js/hero-scrub.js"></script>
+<script src="assets/js/rooms.js"></script>
+</body>
+</html>

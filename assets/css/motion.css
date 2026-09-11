@@ -1,0 +1,544 @@
+/* ==========================================================================
+   BAO TECK TEA HOUSE — MOTION STYLES
+   The visual half of the animation engine. Loads after components.css.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. SMOOTH SCROLL CONTAINER
+   The whole page sits inside this and is moved with a transform. That is
+   what allows the weighted, unhurried scrolling.
+   ========================================================================== */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* The page wrapper is an ordinary block. An earlier version moved it with a
+   transform to get weighted scrolling, but that quietly broke the browser's
+   "is this on screen yet" detection, which is what makes sections appear as
+   you scroll. Reliable content beats a slightly fancier scroll. */
+[data-scroll-root] { position: static; }
+
+/* ==========================================================================
+   2. THE OPENING SEQUENCE
+   The arch assembles, then the whole panel lifts away.
+   ========================================================================== */
+.loader {
+  position: fixed; inset: 0; z-index: 600;
+  display: grid; place-items: center;
+  background: var(--primary-deep);
+  transition: transform 1.1s cubic-bezier(0.76, 0, 0.24, 1),
+              opacity   0.8s ease 0.25s;
+}
+.loader.is-done { transform: translateY(-101%); opacity: 0; pointer-events: none; }
+
+.loader__arch { inline-size: min(64vw, 30rem); }
+.loader__arch .arch-band     { opacity: 0; animation: archIn .8s var(--ease-out) .1s forwards; }
+.loader__arch .arch-wordmark { opacity: 0; animation: archIn .8s var(--ease-out) .95s forwards; }
+.loader__arch .arch-mottos   { opacity: 0; animation: archIn .8s var(--ease-out) 1.15s forwards; }
+.loader__arch .medallion {
+  opacity: 0;
+  transform-box: fill-box; transform-origin: center;
+  animation: medallionIn .62s var(--ease-spring) forwards;
+}
+.loader__arch .medallion[data-i="2"] { animation-delay: .38s; }
+.loader__arch .medallion[data-i="1"],
+.loader__arch .medallion[data-i="3"] { animation-delay: .52s; }
+.loader__arch .medallion[data-i="0"],
+.loader__arch .medallion[data-i="4"] { animation-delay: .66s; }
+
+@keyframes archIn      { to { opacity: 1; } }
+@keyframes medallionIn { from { opacity: 0; transform: scale(.4) translateY(14px); }
+                         to   { opacity: 1; transform: scale(1) translateY(0); } }
+
+.loader__bar {
+  position: absolute; inset-block-end: 14vh; inset-inline-start: 50%;
+  translate: -50% 0;
+  inline-size: min(46vw, 13rem); block-size: 1px;
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  overflow: hidden;
+}
+.loader__bar::after {
+  content: ""; display: block; block-size: 100%; inline-size: 34%;
+  background: var(--accent);
+  animation: sweep 1.25s var(--ease-in-out) infinite;
+}
+@keyframes sweep { 0% { transform: translateX(-110%); } 100% { transform: translateX(400%); } }
+
+/* ==========================================================================
+   3. THE LOGO
+   ========================================================================== */
+.logo-arch { inline-size: 100%; block-size: auto; display: block; }
+
+.logo {
+  display: inline-flex; align-items: center; gap: .7rem;
+  text-decoration: none; color: var(--text);
+  line-height: 1.05;
+}
+.logo__mark {
+  inline-size: 2.9rem; block-size: 2.9rem;
+  flex: none; border-radius: 12px; overflow: hidden;
+  transition: transform var(--dur-base) var(--ease-spring),
+              box-shadow var(--dur-base) var(--ease-out);
+  box-shadow: 0 2px 8px rgb(var(--shadow-color) / .18);
+}
+.logo__mark img, .logo__mark svg { inline-size: 100%; block-size: 100%; display: block; }
+.logo:hover .logo__mark { transform: rotate(-5deg) scale(1.07); box-shadow: var(--shadow-m); }
+
+.logo__text  { display: flex; flex-direction: column; }
+.logo__name  { font-family: var(--font-display); font-size: var(--step-1);
+               letter-spacing: .01em; font-weight: 600; }
+.logo__sub   { font-family: var(--font-body); font-size: var(--step--2);
+               letter-spacing: var(--tracking-widest); text-transform: uppercase;
+               color: var(--text-muted); }
+.logo__cn    { font-size: var(--step--1); color: var(--accent-text); letter-spacing: .22em; }
+
+@media (max-width: 30rem) { .logo__text { display: none; } }
+
+/* ==========================================================================
+   4. HEADLINE REVEAL
+   ========================================================================== */
+.split-line  { display: block; }
+.split-mask  { display: inline-block; overflow: hidden; vertical-align: bottom;
+               padding-block-end: .08em; margin-block-end: -.08em; }
+.split-word  {
+  display: inline-block;
+  transform: translateY(108%) rotate(3deg);
+  opacity: 0;
+  transition: transform 1s var(--ease-out) var(--d, 0ms),
+              opacity   .7s var(--ease-out) var(--d, 0ms);
+}
+.is-revealed .split-word { transform: translateY(0) rotate(0); opacity: 1; }
+
+/* ==========================================================================
+   5. SCROLL REVEAL
+   ========================================================================== */
+.reveal {
+  opacity: 0; transform: translateY(42px);
+  transition: opacity .95s var(--ease-out), transform .95s var(--ease-out);
+}
+.reveal.in { opacity: 1; transform: none; }
+.reveal--left  { transform: translateX(-52px); }
+.reveal--right { transform: translateX(52px); }
+.reveal--scale { transform: scale(.93); }
+
+.reveal-child > * {
+  opacity: 0; transform: translateY(34px);
+  transition: opacity .85s var(--ease-out), transform .85s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 85ms);
+}
+.reveal-child.in > * { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   6. IMAGE REVEAL
+   A mask slides away and the picture settles back from a slight zoom.
+   ========================================================================== */
+.frame {
+  position: relative; overflow: hidden;
+  border-radius: var(--radius-l);
+  background: var(--surface-sunk);
+}
+.frame img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
+
+[data-reveal-image] { clip-path: inset(0 0 100% 0); }
+[data-reveal-image] img {
+  transform: scale(1.28);
+  transition: transform 1.5s var(--ease-out);
+}
+[data-reveal-image].in {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.25s cubic-bezier(0.76, 0, 0.24, 1);
+}
+[data-reveal-image].in img { transform: scale(1.16); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal-image] { clip-path: none; }
+  [data-reveal-image] img { transform: none; }
+}
+
+/* a gilded line that sweeps across as the image opens */
+[data-reveal-image]::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 42%,
+              color-mix(in srgb, var(--accent-glow) 55%, transparent) 50%, transparent 58%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+[data-reveal-image].in::after {
+  animation: sheen 1.5s var(--ease-out) .35s;
+}
+@keyframes sheen { to { transform: translateX(120%); } }
+
+/* ==========================================================================
+   7. THE CURSOR
+   ========================================================================== */
+.cursor-dot, .cursor-ring {
+  position: fixed; inset-block-start: 0; inset-inline-start: 0;
+  z-index: 500; pointer-events: none; border-radius: 50%;
+  will-change: transform;
+}
+.cursor-dot { inline-size: 6px; block-size: 6px; background: var(--accent); }
+.cursor-ring {
+  inline-size: 42px; block-size: 42px;
+  display: grid; place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  transition: inline-size .35s var(--ease-out), block-size .35s var(--ease-out),
+              background .35s var(--ease-out), border-color .35s var(--ease-out);
+}
+.cursor-ring.is-hovering {
+  inline-size: 72px; block-size: 72px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.cursor-ring.is-zoom {
+  inline-size: 96px; block-size: 96px;
+  background: color-mix(in srgb, var(--accent) 90%, transparent);
+  border-color: transparent;
+}
+.cursor-ring.is-down { transform-origin: center; filter: brightness(1.2); }
+.cursor-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--primary-deep); opacity: 0; transition: opacity .25s;
+  white-space: nowrap;
+}
+.cursor-ring.is-zoom .cursor-label { opacity: 1; }
+
+@media (hover: none), (pointer: coarse) { .cursor-dot, .cursor-ring { display: none; } }
+@media (prefers-reduced-motion: reduce)  { .cursor-dot, .cursor-ring { display: none; } }
+
+/* ==========================================================================
+   8. PLACEHOLDER ARTWORK
+   Shown wherever a photograph has not been added yet.
+   ========================================================================== */
+.art-placeholder {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  background:
+    radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 58%),
+    linear-gradient(145deg, var(--surface-sunk), color-mix(in srgb, var(--primary) 16%, var(--surface-sunk)));
+}
+.art-placeholder span {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 8vw, 4.5rem);
+  color: color-mix(in srgb, var(--primary) 52%, transparent);
+  line-height: 1;
+}
+[data-theme="dark"] .art-placeholder span { color: color-mix(in srgb, var(--accent) 42%, transparent); }
+
+/* ==========================================================================
+   9. STICKY SCENES
+   ========================================================================== */
+[data-scene] { position: relative; }
+[data-scene-inner] {
+  position: sticky; inset-block-start: 0;
+  min-block-size: 100svh;
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+[data-scene-step] {
+  grid-area: 1 / 1;
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+  pointer-events: none;
+  text-align: center;
+  max-inline-size: 44rem;
+}
+[data-scene-step].is-active { opacity: 1; transform: none; pointer-events: auto; }
+
+.scene-count {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 20vw, 14rem);
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 22%, transparent);
+  position: absolute; inset-block-start: 8%; inset-inline-start: 50%;
+  translate: -50% 0; z-index: -1; pointer-events: none;
+}
+
+/* ==========================================================================
+   10. MENU DISH CARDS
+   ========================================================================== */
+.dish {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  transition: transform .55s var(--ease-out), box-shadow .55s var(--ease-out),
+              border-color .4s var(--ease-out);
+}
+.dish:hover, .dish:focus-within {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-xl);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.dish[hidden] { display: none; }
+
+.dish__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface-sunk); }
+.dish__media img {
+  inline-size: 100%; block-size: 100%; object-fit: cover;
+  transition: transform 1.1s var(--ease-out), filter .6s var(--ease-out);
+}
+.dish:hover .dish__media img, .dish:focus-within .dish__media img {
+  transform: scale(1.12); filter: brightness(.42) saturate(.8);
+}
+
+.dish__reveal {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: .4rem;
+  padding: var(--space-m);
+  color: var(--text-on-dark);
+  background: linear-gradient(to top,
+      color-mix(in srgb, var(--primary-deep) 92%, transparent) 0%,
+      color-mix(in srgb, var(--primary-deep) 64%, transparent) 52%, transparent 100%);
+  opacity: 0;
+}
+.dish:hover .dish__reveal, .dish:focus-within .dish__reveal { opacity: 1; }
+.dish__reveal > * {
+  transform: translateY(22px); opacity: 0;
+  transition: transform .5s var(--ease-out), opacity .5s var(--ease-out);
+}
+.dish:hover .dish__reveal > *, .dish:focus-within .dish__reveal > * {
+  transform: none; opacity: 1;
+}
+.dish:hover .dish__reveal > *:nth-child(1) { transition-delay: .04s; }
+.dish:hover .dish__reveal > *:nth-child(2) { transition-delay: .10s; }
+.dish:hover .dish__reveal > *:nth-child(3) { transition-delay: .16s; }
+.dish:hover .dish__reveal > *:nth-child(4) { transition-delay: .22s; }
+
+.dish__reveal-title  { font-family: var(--font-display); font-size: var(--step-1);
+                       color: var(--text-on-dark); line-height: 1.2; }
+.dish__reveal-native { font-size: var(--step--1); color: var(--accent-glow); letter-spacing: .05em; }
+.dish__reveal-desc   { font-size: var(--step--1); line-height: 1.6; max-inline-size: none;
+                       color: color-mix(in srgb, var(--text-on-dark) 90%, transparent); }
+.dish__reveal-tags   { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+/* On a touch screen there is no hovering, so the words are simply shown. */
+@media (hover: none), (pointer: coarse) {
+  .dish__reveal {
+    position: static; opacity: 1; background: none;
+    color: var(--text); padding-block-start: var(--space-s);
+  }
+  .dish__reveal > * { transform: none; opacity: 1; }
+  .dish__reveal-title  { color: var(--text); }
+  .dish__reveal-native { color: var(--accent-text); }
+  .dish__reveal-desc   { color: var(--text-muted); }
+  .dish:hover .dish__media img { filter: none; transform: none; }
+}
+
+/* ==========================================================================
+   11. WHATSAPP BUTTON
+   ========================================================================== */
+.btn--whatsapp { --btn-bg: #1d9e5f; --btn-fg: #fff; }
+.btn--whatsapp::before { background: #157a48; }
+.btn--whatsapp:hover { color: #fff; }
+.btn--whatsapp svg { inline-size: 1.15em; block-size: 1.15em; }
+
+.wa-float {
+  position: fixed;
+  inset-block-end: calc(var(--space-m) + 3.6rem);
+  inset-inline-end: var(--space-m);
+  z-index: 100;
+  inline-size: 52px; block-size: 52px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #1d9e5f; color: #fff;
+  border: 0; cursor: pointer;
+  box-shadow: 0 6px 20px rgb(0 0 0 / .22);
+  transition: transform .35s var(--ease-spring), box-shadow .35s var(--ease-out);
+}
+.wa-float:hover { transform: scale(1.09) rotate(-6deg); box-shadow: 0 10px 28px rgb(0 0 0 / .3); }
+.wa-float:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; }
+.wa-float svg { inline-size: 26px; block-size: 26px; }
+.wa-float::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  border: 2px solid #1d9e5f; animation: waPulse 2.6s ease-out infinite;
+}
+@keyframes waPulse {
+  0%   { transform: scale(1);    opacity: .7; }
+  70%  { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .wa-float::after { animation: none; } }
+
+/* ==========================================================================
+   12. SECTION TRANSITIONS
+   A soft gilded rule that draws itself as each section arrives.
+   ========================================================================== */
+.rule-draw {
+  block-size: 1px; border: 0;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform 1.2s var(--ease-out);
+}
+.rule-draw.in { transform: scaleX(1); }
+
+/* ==========================================================================
+   13. IF THE CONTENT FILES FAIL TO LOAD
+   The visitor gets a clear explanation instead of a blank white page.
+   ========================================================================== */
+.i18n-failed main::before {
+  content: "The website content files did not load. Please check that the content folder is present alongside index.html.";
+  display: block;
+  max-inline-size: 40rem;
+  margin: 8rem auto;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+/* ==========================================================================
+   14. LAYOUT PIECES USED BY THE REBUILT PAGES
+   ========================================================================== */
+
+/* Two-column editorial split. Collapses to one column on a phone. */
+.split-grid {
+  display: grid;
+  gap: var(--space-2xl);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+}
+.split-grid--center { align-items: center; }
+
+/* The compact hero used on every page except the home page */
+.page-hero { padding-block-start: calc(var(--section-y) + 5.5rem); position: relative; overflow: hidden; }
+.page-hero__grid {
+  display: grid; gap: var(--space-2xl); align-items: end;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+.page-hero h1 { font-size: var(--step-6); }
+
+/* Home hero, rebuilt so the background image and its placeholder stack */
+.hero__bg { position: absolute; inset: -8% 0 0 0; z-index: -2; will-change: transform; }
+.hero__bg img { inline-size: 100%; block-size: 112%; object-fit: cover; }
+.hero__bg .art-placeholder {
+  background:
+    radial-gradient(ellipse 80% 60% at 24% 18%, color-mix(in srgb, var(--primary-soft) 75%, transparent), transparent 62%),
+    radial-gradient(ellipse 70% 55% at 78% 76%, color-mix(in srgb, var(--tile-jade) 55%, transparent), transparent 64%),
+    linear-gradient(160deg, var(--primary-deep), var(--primary) 55%, #0f1f19);
+}
+.hero__bg .art-placeholder span { color: color-mix(in srgb, var(--accent) 34%, transparent); font-size: clamp(6rem, 24vw, 16rem); }
+
+/* ── The sign section on the Our Story page ── */
+.sign-section { position: relative; overflow: hidden; }
+.sign-arch {
+  max-inline-size: min(100%, 46rem);
+  margin-inline: auto;
+  filter: drop-shadow(0 18px 40px rgb(0 0 0 / .45));
+}
+.sign-arch img { inline-size: 100%; block-size: auto; }
+
+.motto-pair {
+  display: grid; gap: var(--space-s);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  margin-block-start: var(--space-s);
+}
+.motto-card {
+  padding: var(--space-m);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: var(--radius-m);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  text-align: center;
+}
+.motto-cn {
+  font-family: "Noto Serif TC", "Songti TC", serif;
+  font-size: var(--step-3);
+  color: var(--accent-glow);
+  letter-spacing: .16em;
+  line-height: 1.35;
+  margin-block-end: var(--space-2xs);
+}
+.section--dark .motto-card .text-sm { color: color-mix(in srgb, var(--text-on-dark) 72%, transparent); }
+
+/* ── The arch printed faintly at the top of the footer ── */
+.footer-arch {
+  max-inline-size: min(100%, 28rem);
+  margin: 0 auto var(--space-2xl);
+  opacity: .38;
+}
+.footer-arch img { inline-size: 100%; block-size: auto; }
+
+/* ── Menu page hint text swaps for touch screens ── */
+.hint-touch { display: none; }
+@media (hover: none), (pointer: coarse) {
+  .hint-hover { display: none; }
+  .hint-touch { display: inline; }
+}
+
+/* ── Sticky filter bar on the menu ── */
+[data-menu-filters] {
+  position: sticky;
+  inset-block-start: 5rem;
+  z-index: 100;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  padding-block: var(--space-s);
+  border-radius: var(--radius-full);
+  display: flex; flex-wrap: wrap; gap: var(--space-2xs);
+  justify-content: center;
+  margin-block-end: var(--space-xl);
+}
+
+
+/* ── Scroll cue ── */
+.scroll-cue { will-change: opacity; }
+
+/* ── The hero content needs its own layer for the parallax ── */
+.hero__content { will-change: transform, opacity; }
+
+/* ==========================================================================
+   15. KEEP THE FLOATING BUTTONS CLEAR OF THE HERO TEXT
+   ========================================================================== */
+.hero__meta {
+  inset-inline-end: auto;
+  inset-inline-start: var(--gutter);
+  text-align: start;
+}
+[dir="rtl"] .hero__meta { text-align: end; }
+@media (max-width: 64rem) { .hero__meta { display: none; } }
+
+/* the back-to-top button sits above the WhatsApp button */
+.to-top { inset-block-end: var(--space-m); inset-inline-end: var(--space-m); }
+
+/* ==========================================================================
+   16. DISH CARD FOOT
+   The name and the price were fighting for the same line. The name now takes
+   the width it needs and the price sits beneath it on narrow cards.
+   ========================================================================== */
+.dish__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .35rem var(--space-2xs);
+  padding: var(--space-s) var(--space-m) var(--space-m);
+  border-block-start: 1px solid var(--border);
+}
+.dish__name  { flex: 1 1 8rem; font-size: var(--step-0); line-height: 1.25; }
+.dish__price { font-size: var(--step-0); font-weight: 700; white-space: nowrap; }
+.dish__unit  { display: block; text-align: end; font-size: var(--step--2); color: var(--text-muted); }
+.dish__bar > div { text-align: end; flex: 0 0 auto; }
+
+/* ==========================================================================
+   17. TEXT ON THE DARK SECTIONS
+   The muted grey used for body copy was inherited from the light theme and
+   sat almost invisibly on the dark green. Rather than patching each class,
+   the colour variables themselves are redefined inside a dark section, so
+   every piece of text picks up a readable colour automatically.
+   ========================================================================== */
+.section--dark,
+.site-footer {
+  --text:        var(--text-on-dark);
+  --text-muted:  color-mix(in srgb, var(--text-on-dark) 76%, transparent);
+  --accent-text: var(--accent-glow);
+  --border:      color-mix(in srgb, var(--text-on-dark) 20%, transparent);
+  --border-strong: color-mix(in srgb, var(--text-on-dark) 34%, transparent);
+  --surface:     color-mix(in srgb, #fff 6%, transparent);
+  color: var(--text-on-dark);
+}
+.section--dark .lead,
+.site-footer  .lead { color: color-mix(in srgb, var(--text-on-dark) 82%, transparent); }
+
+.section--dark p,
+.section--dark h1, .section--dark h2,
+.section--dark h3, .section--dark h4 { color: var(--text-on-dark); }
+
+/* the eyebrow rule and accent text need the brighter gold on dark */
+.section--dark .eyebrow { color: var(--accent-glow); }

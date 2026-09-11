@@ -1,0 +1,4 @@
+Contact: mailto:REPLACE-WITH-YOUR-EMAIL@example.com
+Preferred-Languages: en, ms, zh
+Canonical: https://www.baoteckteahouse.com/.well-known/security.txt
+Expires: 2030-01-01T00:00:00.000Z
