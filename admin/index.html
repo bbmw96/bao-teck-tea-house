@@ -245,7 +245,7 @@ function get(o,p){ return p.split('.').reduce((a,k)=> (a&&k in a)?a[k]:undefined
 function set(o,p,v){ const q=p.split('.'), last=q.pop(); q.reduce((a,k)=> (a[k]=a[k]||{}), o)[last]=v; }
 const clone = o => JSON.parse(JSON.stringify(o));
 
-/* ── LOAD ───────────────────────────────────────────────── */
+/* ── LOAD ───────────────────────────────────────────────────────── */
 function load(){
   if (!window.BTTH || !window.BTTH.shared || !window.BTTH.lang.en) {
     say('Could not find the content files. Make sure the admin folder sits inside the website folder.');
@@ -259,7 +259,7 @@ function load(){
   say('Ready. Make your changes, then press Save.', true);
 }
 
-/* ── TABS ───────────────────────────────────────────────── */
+/* ── TABS ───────────────────────────────────────────────────────── */
 function buildTabs(){
   const defs = [['p-details','Contact & hours'],['p-prices','Prices'],['p-words','Words'],['p-photos','Photos']];
   const bar = $('#tabs'); bar.replaceChildren();
@@ -276,7 +276,7 @@ function buildTabs(){
   });
 }
 
-/* ── SHARED FIELDS ────────────────────────────────────── */
+/* ── SHARED FIELDS ──────────────────────────────────────────────── */
 function bindShared(){
   document.querySelectorAll('[data-shared]').forEach(inp=>{
     const path = inp.dataset.shared;
@@ -285,7 +285,7 @@ function bindShared(){
   });
 }
 
-/* ── HOURS ───────────────────────────────────────────────── */
+/* ── HOURS ──────────────────────────────────────────────────────── */
 function buildHours(){
   const mount=$('#hours'); mount.replaceChildren();
   DAYS.forEach(d=>{
@@ -327,7 +327,7 @@ function buildHours(){
   });
 }
 
-/* ── PRICES ──────────────────────────────────────────────── */
+/* ── PRICES ─────────────────────────────────────────────────────── */
 function buildPrices(){
   const en=state.langs.en;
   const m=$('#prices'); m.replaceChildren();
@@ -366,7 +366,7 @@ function buildPrices(){
   d.append(l,i); tm.appendChild(d);
 }
 
-/* ── WORDS ───────────────────────────────────────────────── */
+/* ── WORDS ───────────────────────────────────────────────────── */
 const SECTIONS=[
   ['site','Website name and description'],['home','Home page'],['menu','Menu page'],
   ['tea','Tea page'],['story','Our Story page'],['gallery','Gallery page'],
@@ -442,7 +442,7 @@ function walk(node,path,out,q){
   });
 }
 
-/* ── PHOTOS ───────────────────────────────────────────────── */
+/* ── PHOTOS ─────────────────────────────────────────────────────── */
 function buildPhotos(){
   const en=state.langs.en;
   const m=$('#photos'); m.replaceChildren();
@@ -465,7 +465,7 @@ function buildPhotos(){
   });
 }
 
-/* ── SAVE ───────────────────────────────────────────────── */
+/* ── SAVE ───────────────────────────────────────────────────────── */
 const HEAD = (title, assign) =>
 `/* ====================================================================
    ${title}
