@@ -7,8 +7,8 @@
      own logo file, the website shows the shop's name and nothing more: no
      invented arch, no invented seal, no invented monogram.
 
-     TO USE THE REAL LOGO: drop the shop's own file into
-     photos/06-logo-and-brand/ and follow GUIDE 6. Nothing here needs editing.
+     TO USE THE REAL LOGO: save the shop's own file into
+     01-WEBSITE/images/brand/ and follow GUIDE 6. Nothing here needs editing.
 
      The characters are drawn as vector outlines, so they render identically
      everywhere and never depend on a Chinese font being installed.
