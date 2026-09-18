@@ -119,6 +119,13 @@
       <label for="f-email">Email address</label>
       <input id="f-email" data-shared="contact.email" placeholder="hello@yourdomain.com">
       <p class="hint">Leave this untouched and the site politely asks people to phone or message instead.</p>
+      <label for="f-resform">Reservation form web address (optional)</label>
+      <input id="f-resform" data-shared="contact.reservationFormEndpoint" placeholder="https://formspree.io/f/abcdwxyz">
+      <p class="hint">This lets the reservation form on the website also email you a copy of every
+        request, on top of opening WhatsApp. To switch it on: go to formspree.io, make a free
+        account, create one form pointed at your email address above, and paste the web address
+        it gives you here. Leave it blank and the form still works, it just relies on WhatsApp
+        alone.</p>
       <div class="row">
         <div><label for="f-a1">Street address</label><input id="f-a1" data-shared="contact.addressLine1"></div>
         <div><label for="f-a2">Town and postcode</label><input id="f-a2" data-shared="contact.addressLine2"></div>
@@ -148,6 +155,14 @@
         <div><label for="f-legal">Registered company name</label><input id="f-legal" data-shared="brand.legalName"></div>
         <div><label for="f-reg">Company registration number</label><input id="f-reg" data-shared="brand.registrationNo"></div>
       </div>
+      <label for="f-logo">Logo file name (optional)</label>
+      <input id="f-logo" data-shared="brand.logoFile" placeholder="logo.svg">
+      <p class="hint">Once you have your real logo: save the file into
+        01-WEBSITE/images/brand/, then type its file name here exactly as it is
+        saved, for example logo.svg or logo.png. Leave this blank and the site
+        keeps showing your name set in type at the top of every page, which is
+        the safe default until you add the real file. See GUIDE 6 in
+        03-HOW-TO-GUIDES for the full walk-through.</p>
     </div>
   </section>
 
@@ -230,7 +245,7 @@ function get(o,p){ return p.split('.').reduce((a,k)=> (a&&k in a)?a[k]:undefined
 function set(o,p,v){ const q=p.split('.'), last=q.pop(); q.reduce((a,k)=> (a[k]=a[k]||{}), o)[last]=v; }
 const clone = o => JSON.parse(JSON.stringify(o));
 
-/* ── LOAD ───────────────────────────────────────────────────────── */
+/* ── LOAD ───────────────────────────────────────────────── */
 function load(){
   if (!window.BTTH || !window.BTTH.shared || !window.BTTH.lang.en) {
     say('Could not find the content files. Make sure the admin folder sits inside the website folder.');
@@ -244,7 +259,7 @@ function load(){
   say('Ready. Make your changes, then press Save.', true);
 }
 
-/* ── TABS ───────────────────────────────────────────────────────── */
+/* ── TABS ───────────────────────────────────────────────── */
 function buildTabs(){
   const defs = [['p-details','Contact & hours'],['p-prices','Prices'],['p-words','Words'],['p-photos','Photos']];
   const bar = $('#tabs'); bar.replaceChildren();
@@ -261,7 +276,7 @@ function buildTabs(){
   });
 }
 
-/* ── SHARED FIELDS ──────────────────────────────────────────────── */
+/* ── SHARED FIELDS ────────────────────────────────────── */
 function bindShared(){
   document.querySelectorAll('[data-shared]').forEach(inp=>{
     const path = inp.dataset.shared;
@@ -270,7 +285,7 @@ function bindShared(){
   });
 }
 
-/* ── HOURS ──────────────────────────────────────────────────────── */
+/* ── HOURS ───────────────────────────────────────────────── */
 function buildHours(){
   const mount=$('#hours'); mount.replaceChildren();
   DAYS.forEach(d=>{
@@ -312,7 +327,7 @@ function buildHours(){
   });
 }
 
-/* ── PRICES ─────────────────────────────────────────────────────── */
+/* ── PRICES ──────────────────────────────────────────────── */
 function buildPrices(){
   const en=state.langs.en;
   const m=$('#prices'); m.replaceChildren();
@@ -351,7 +366,7 @@ function buildPrices(){
   d.append(l,i); tm.appendChild(d);
 }
 
-/* ── WORDS ──────────────────────────────────────────────────────── */
+/* ── WORDS ───────────────────────────────────────────────── */
 const SECTIONS=[
   ['site','Website name and description'],['home','Home page'],['menu','Menu page'],
   ['tea','Tea page'],['story','Our Story page'],['gallery','Gallery page'],
@@ -427,7 +442,7 @@ function walk(node,path,out,q){
   });
 }
 
-/* ── PHOTOS ─────────────────────────────────────────────────────── */
+/* ── PHOTOS ───────────────────────────────────────────────── */
 function buildPhotos(){
   const en=state.langs.en;
   const m=$('#photos'); m.replaceChildren();
@@ -450,7 +465,7 @@ function buildPhotos(){
   });
 }
 
-/* ── SAVE ───────────────────────────────────────────────────────── */
+/* ── SAVE ───────────────────────────────────────────────── */
 const HEAD = (title, assign) =>
 `/* ====================================================================
    ${title}
