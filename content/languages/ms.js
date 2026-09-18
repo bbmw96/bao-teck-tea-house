@@ -34,6 +34,7 @@ window.BTTH.lang["ms"] = {
     "story": "Kisah Kami",
     "gallery": "Galeri",
     "visit": "Kunjungi Kami",
+    "reserve": "Tempah",
     "openMenu": "Buka menu",
     "closeMenu": "Tutup menu",
     "toggleTheme": "Tukar antara mod cerah dan gelap",
@@ -466,8 +467,8 @@ window.BTTH.lang["ms"] = {
     },
     "booking": {
       "title": "Tempahan",
-      "body": "Kami menerima tempahan melalui telefon. Hujung minggu dan cuti umum sering penuh, dan selalunya ada barisan di pintu tanpa tempahan. Jika anda mahukan bilik tetamu di tingkat atas untuk kumpulan besar, sila hubungi kami lebih awal, ia perlu diatur terlebih dahulu.",
-      "cta": "Telefon untuk menempah"
+      "body": "Tempah melalui WhatsApp, borang tempahan kami, atau telefon, mengikut apa yang mudah untuk anda. Hujung minggu dan cuti umum sering penuh, dan selalunya ada barisan di pintu tanpa tempahan. Jika anda mahukan bilik tetamu di tingkat atas untuk kumpulan besar, sila maklumkan kami lebih awal, ia perlu diatur terlebih dahulu.",
+      "cta": "Tempah meja"
     },
     "faq": {
       "title": "Sebelum anda datang",
@@ -507,6 +508,47 @@ window.BTTH.lang["ms"] = {
       }
     }
   },
+  "reserve": {
+    "meta": {
+      "title": "Tempah Meja",
+      "description": "Tempah meja di Bao Teck Tea House melalui WhatsApp atau borang ringkas. Kami akan membalas secara peribadi untuk mengesahkan."
+    },
+    "hero": {
+      "eyebrow": "TEMPAHAN",
+      "title": "Bagaimana anda ingin membuat tempahan?",
+      "lead": "Kedua-dua cara ini terus sampai kepada kami dan mendapat balasan peribadi. Pilih mana-mana yang lebih mudah untuk anda."
+    },
+    "choice": {
+      "whatsapp": {
+        "title": "Hantar mesej melalui WhatsApp",
+        "body": "Beritahu kami dengan kata-kata anda sendiri. Sesuai untuk permintaan pantas atau sebarang soalan tambahan.",
+        "cta": "Buka WhatsApp",
+        "message": "Hai Bao Teck Tea House, saya ingin menempah meja."
+      },
+      "form": {
+        "title": "Isikan borang",
+        "body": "Hantar butiran anda sekali sahaja. Ia akan sampai kepada kami melalui WhatsApp dan e-mel pada masa yang sama.",
+        "cta": "Pergi ke borang"
+      }
+    },
+    "form": {
+      "eyebrow": "BORANG",
+      "title": "Permintaan tempahan",
+      "note": "Ini adalah permintaan, bukan tempahan yang disahkan. Kami akan membalas melalui telefon atau WhatsApp untuk mengesahkannya.",
+      "name": "Nama anda",
+      "phone": "Nombor telefon",
+      "party": "Bilangan tetamu",
+      "date": "Tarikh pilihan",
+      "time": "Masa pilihan",
+      "notes": "Sebarang perkara yang perlu kami tahu",
+      "notesHint": "Alahan, bilik tetamu di tingkat atas, majlis istimewa, dan sebagainya. Pilihan sahaja.",
+      "submit": "Hantar permintaan tempahan",
+      "sending": "Menghantar",
+      "successWhatsapp": "Terima kasih. WhatsApp kini terbuka dengan butiran anda sedia untuk dihantar. Sila tekan Hantar di sana supaya ia sampai kepada kami.",
+      "successBoth": "Terima kasih. Satu salinan telah sampai kepada kami melalui e-mel, dan WhatsApp kini terbuka dengan butiran anda sedia untuk dihantar. Sila tekan Hantar di sana juga, supaya ia sampai melalui kedua-dua cara.",
+      "errorRequired": "Sila isikan nama, nombor telefon, bilangan tetamu, tarikh dan masa sebelum menghantar."
+    }
+  },
   "footer": {
     "about": "Sebuah rumah dim sum dan bilik teh di dalam rumah kedai pra-perang yang telah dipulihkan di Lebuh Melayu, George Town, Pulau Pinang. Tersenarai dalam MICHELIN Guide.",
     "explore": "Terokai",
@@ -514,6 +556,7 @@ window.BTTH.lang["ms"] = {
     "followUs": "Ikuti kami",
     "hours": "Waktu operasi",
     "rights": "Hak cipta terpelihara.",
+    "createdBy": "Dicipta oleh BBMW0 Technologies.",
     "madeNote": "Kandungan laman web ini boleh disunting oleh pemilik, sila rujuk panduan yang disertakan bersama laman ini.",
     "facebook": "Bao Teck Tea House di Facebook",
     "instagram": "Bao Teck Tea House di Instagram",

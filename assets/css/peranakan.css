@@ -1364,7 +1364,7 @@ html[lang^="zh"] .mobile-nav__cn { display: none; }
    35. THE NAME IN THE HEADER
    The shop's own name, 包德館, set in type. No invented emblem stands in for
    a logo the shop has not given us. When the real logo arrives it replaces
-   this automatically: see LOGO_FILE at the top of assets/js/site.js.
+   this automatically: see brand.logoFile in content/shared.js.
    ========================================================================== */
 /* The earlier design put the name inside a jade tile with a rotate-on-hover.
    That tile was an invented container, so it goes: the name stands on its own,

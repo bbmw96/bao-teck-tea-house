@@ -36,7 +36,9 @@ window.BTTH.shared = {
     "whatsapp": "+60 19-677 7838",
     "whatsappLink": "60196777838",
     "whatsappUrl": "https://wa.me/60196777838",
-    "_whatsapp_note": "Taken from the WhatsApp link on the official Facebook page. Messages open straight into WhatsApp on a phone, or WhatsApp Web on a computer."
+    "_whatsapp_note": "Taken from the WhatsApp link on the official Facebook page. Messages open straight into WhatsApp on a phone, or WhatsApp Web on a computer.",
+    "reservationFormEndpoint": "",
+    "_reservationFormEndpoint_note": "OWNER: the reservation form on the Reserve page can email you a copy of every request, in addition to opening WhatsApp. To switch this on: go to formspree.io, make a free account, create one form pointed at your real email address above, and paste the web address it gives you here (it looks like https://formspree.io/f/abcdwxyz). Leave this blank and the form will still work, it will just skip the email and rely on WhatsApp alone."
   },
   "social": {
     "facebook": "https://www.facebook.com/baoteck25",
@@ -103,7 +105,9 @@ window.BTTH.shared = {
     "registrationNo": "201301032930 (1062759-V)",
     "mottoRight": "貨真價實",
     "mottoLeft": "童叟無欺",
-    "_motto_note": "The two vertical inscriptions carved on the sign. A traditional pair of merchant pledges: genuine goods at honest prices, and never cheating anyone, young or old."
+    "_motto_note": "The two vertical inscriptions carved on the sign. A traditional pair of merchant pledges: genuine goods at honest prices, and never cheating anyone, young or old.",
+    "logoFile": "",
+    "_logoFile_note": "OWNER: the website shows your shop's name set in type until you add your real logo. To switch on the real one: save the file into 01-WEBSITE/images/brand/, then put its file name here between the quote marks (for example \"logo.svg\" or \"logo.png\"). A see-through PNG or an SVG both work best. Leave this blank and the site keeps showing the name in type, which is deliberate: it never invents a logo of its own. See GUIDE 6 in 03-HOW-TO-GUIDES for the full walk-through."
   },
   "_MENU_NOTE": "PRICES BELOW WERE PUBLISHED BY FOOD WRITERS IN 2020-2021 AND ARE ALMOST CERTAINLY OUT OF DATE. Please update every 'price' number to your current prices before the site goes live. Set 'price' to null to hide the price entirely and show 'ask in store' instead.",
   "menu": {

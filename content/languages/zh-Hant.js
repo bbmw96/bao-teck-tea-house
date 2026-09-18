@@ -34,6 +34,7 @@ window.BTTH.lang["zh-Hant"] = {
     "story": "我哋嘅故事",
     "gallery": "相簿",
     "visit": "點樣搵我哋",
+    "reserve": "訂枱",
     "openMenu": "打開選單",
     "closeMenu": "閂埋選單",
     "toggleTheme": "轉淺色／深色",
@@ -466,8 +467,8 @@ window.BTTH.lang["zh-Hant"] = {
     },
     "booking": {
       "title": "訂枱",
-      "body": "我哋接受電話訂枱。週末同公眾假期成日爆滿，冇訂枱通常要喺門口排隊。如果你想包起樓上個廳請客，請早啲打嚟，嗰啲要事先安排。",
-      "cta": "打電話訂枱"
+      "body": "你可以用 WhatsApp、訂枱表格或者打電話嚟訂枱，邊樣方便就用邊樣。週末同公眾假期成日爆滿，冇訂枱通常要喺門口排隊。如果你想包起樓上個廳請客，請早啲打嚟，嗰啲要事先安排。",
+      "cta": "即刻訂枱"
     },
     "faq": {
       "title": "嚟之前",
@@ -507,6 +508,47 @@ window.BTTH.lang["zh-Hant"] = {
       }
     }
   },
+  "reserve": {
+    "meta": {
+      "title": "訂枱",
+      "description": "用 WhatsApp 或者一個短短嘅表格，訂包德館嘅位。我哋會親自覆你確認。"
+    },
+    "hero": {
+      "eyebrow": "訂枱",
+      "title": "你想點訂枱？",
+      "lead": "兩種方法都可以直接搵到我哋，仲會有人親自覆你。揀返一個你方便嘅就得。"
+    },
+    "choice": {
+      "whatsapp": {
+        "title": "用 WhatsApp 傳畀我哋",
+        "body": "用你自己嘅講法話畀我哋知。啱晒想快啲問，或者順便問埋啲問題嗰陣。",
+        "cta": "開 WhatsApp",
+        "message": "你好，包德館，我想訂一張枱。"
+      },
+      "form": {
+        "title": "填表格",
+        "body": "填一次就得，資料會同時透過 WhatsApp 同電郵送到我哋呢邊。",
+        "cta": "去表格"
+      }
+    },
+    "form": {
+      "eyebrow": "訂枱表格",
+      "title": "訂枱申請",
+      "note": "呢個係申請，唔係確認咗嘅訂枱。我哋會打電話或者用 WhatsApp 覆你確認。",
+      "name": "你嘅名",
+      "phone": "電話號碼",
+      "party": "用餐人數",
+      "date": "想要嘅日期",
+      "time": "想要嘅時間",
+      "notes": "有冇嘢想我哋留意",
+      "notesHint": "食物敏感、樓上個廳、特別場合等等，呢項唔係必填。",
+      "submit": "送出訂枱申請",
+      "sending": "傳送中",
+      "successWhatsapp": "多謝你。WhatsApp 而家開咗，你嘅資料已經準備好，記得喺嗰邊撳「傳送」，先會送到我哋呢邊。",
+      "successBoth": "多謝你。電郵副本已經送到我哋呢邊，WhatsApp 亦已經開咗，資料準備好。記得喺嗰邊都撳埋「傳送」，兩種方法先會一齊送到我哋呢邊。",
+      "errorRequired": "麻煩你先填好名、電話號碼、用餐人數、日期同時間，先送出。"
+    }
+  },
   "footer": {
     "about": "喺檳城喬治市馬來街一間修復好嘅戰前老舖屋，係點心館，亦係茶室。獲米芝蓮指南推介。",
     "explore": "睇下",
@@ -514,6 +556,7 @@ window.BTTH.lang["zh-Hant"] = {
     "followUs": "跟住我哋",
     "hours": "營業時間",
     "rights": "版權所有。",
+    "createdBy": "網站由 BBMW0 Technologies 製作。",
     "madeNote": "呢個網站嘅內容店主可以自己改，詳情請睇隨網站附上嘅指南。",
     "facebook": "包德館嘅 Facebook",
     "instagram": "包德館嘅 Instagram",

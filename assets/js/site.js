@@ -22,15 +22,15 @@ const SITE = (() => {
      show an invented emblem, because the shop's real logo is the carved sign
      over the door and only the shop can supply that file.
 
-     WHEN YOU HAVE THE REAL LOGO:
-       1. Save it into  photos/06-logo-and-brand/
-       2. Put its file name on the line below, between the quote marks
-       3. Save this file. That is the whole change.
-
-     Example:  const LOGO_FILE = 'logo.svg';
-     A see-through PNG or an SVG both work. Leave it as null to show the name.
+     WHEN THE OWNER HAS THE REAL LOGO:
+     The file name lives in content/shared.js, under brand.logoFile, and is
+     also a plain field on the Brand tab of admin/index.html — so switching
+     it on never needs a developer or a code edit, only the same Save-and-
+     upload routine as every other change on the site. See that file's own
+     "_logoFile_note" for the exact steps. Leave it blank and the name in
+     type is what shows, which is deliberate: nothing here ever invents a
+     logo of its own.
      ====================================================================== */
-  const LOGO_FILE = null;
 
   /* The Chinese label beside each entry in the phone menu is decorative and
      is written in Traditional characters to match the carved shop sign. It is
@@ -41,7 +41,8 @@ const SITE = (() => {
     { key: 'nav.tea',     file: 'tea.html',     cn: '茶'   },
     { key: 'nav.story',   file: 'story.html',   cn: '緣起' },
     { key: 'nav.gallery', file: 'gallery.html', cn: '光影' },
-    { key: 'nav.visit',   file: 'visit.html',   cn: '蒞臨' }
+    { key: 'nav.visit',   file: 'visit.html',   cn: '蒞臨' },
+    { key: 'nav.reserve', file: 'reserve.html', cn: '訂'   }
   ];
 
   function el(tag, attrs = {}, children = []) {
@@ -80,8 +81,9 @@ const SITE = (() => {
     const mount = document.querySelector('[data-site-header]');
     if (!mount) return;
 
-    const mark = LOGO_FILE
-      ? el('img', { src: base() + 'photos/06-logo-and-brand/' + LOGO_FILE,
+    const logoFile = shared.brand.logoFile;
+    const mark = logoFile
+      ? el('img', { src: base() + 'images/brand/' + logoFile,
                     alt: '', height: '58' })
       : null;
 
@@ -221,7 +223,9 @@ const SITE = (() => {
 
         el('div', { class: 'footer__bottom' }, [
           el('span', { 'data-copyright': '' }),
-          el('span', { class: 'text-sm', 'data-i18n': 'footer.madeNote' })
+          el('span', { class: 'text-sm', 'data-i18n': 'footer.madeNote' }),
+          el('a', { class: 'text-sm', href: 'https://bbmw0.com', target: '_blank',
+                    rel: 'noopener noreferrer', 'data-i18n': 'footer.createdBy' })
         ])
       ]));
   }

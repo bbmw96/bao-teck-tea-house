@@ -713,12 +713,16 @@
 .site-footer a { color: color-mix(in srgb, var(--text-on-dark) 78%, transparent); text-decoration: none; }
 .site-footer a:hover { color: var(--accent-glow); }
 .footer-grid { display: grid; gap: var(--space-xl); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.footer-grid > div { min-width: 0; }
 .footer__title {
   font-size: var(--step--1); font-weight: 700;
   letter-spacing: var(--tracking-widest); text-transform: uppercase;
   color: var(--accent-glow); margin-block-end: var(--space-s);
 }
-.footer__list { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; font-size: var(--step--1); }
+/* A phone number or long link has nowhere natural to break, so on a narrow
+   column it is allowed to break anywhere rather than push past the edge
+   of the page, the way the shop's own address or a plain sentence would. */
+.footer__list { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; font-size: var(--step--1); overflow-wrap: anywhere; }
 .footer__bottom {
   margin-block-start: var(--space-2xl); padding-block-start: var(--space-m);
   border-block-start: 1px solid color-mix(in srgb, var(--text-on-dark) 18%, transparent);

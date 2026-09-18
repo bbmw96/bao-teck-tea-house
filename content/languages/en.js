@@ -34,6 +34,7 @@ window.BTTH.lang["en"] = {
     "story": "Our Story",
     "gallery": "Gallery",
     "visit": "Visit Us",
+    "reserve": "Reserve",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "toggleTheme": "Switch between light and dark",
@@ -466,8 +467,8 @@ window.BTTH.lang["en"] = {
     },
     "booking": {
       "title": "Reservations",
-      "body": "We take bookings by telephone. Weekends and public holidays fill up, and there is often a queue at the door without one. If you want the upstairs parlour for a large group, call ahead; it needs to be arranged.",
-      "cta": "Call to book"
+      "body": "Reserve by WhatsApp, by our reservation form, or by telephone, whichever suits you. Weekends and public holidays fill up, and there is often a queue at the door without one. If you want the upstairs parlour for a large group, let us know ahead; it needs to be arranged.",
+      "cta": "Reserve a table"
     },
     "faq": {
       "title": "Before you come",
@@ -507,6 +508,47 @@ window.BTTH.lang["en"] = {
       }
     }
   },
+  "reserve": {
+    "meta": {
+      "title": "Reserve a Table",
+      "description": "Reserve a table at Bao Teck Tea House by WhatsApp or by a short form. We reply personally to confirm."
+    },
+    "hero": {
+      "eyebrow": "RESERVE",
+      "title": "How would you like to reserve?",
+      "lead": "Both ways reach us directly and get a personal reply. Pick whichever is easier for you."
+    },
+    "choice": {
+      "whatsapp": {
+        "title": "Message us on WhatsApp",
+        "body": "Tell us in your own words. Good for a quick request or a question alongside it.",
+        "cta": "Open WhatsApp",
+        "message": "Hi Bao Teck Tea House, I would like to reserve a table."
+      },
+      "form": {
+        "title": "Fill in the form",
+        "body": "Send your details once. It reaches us by WhatsApp and by email at the same time.",
+        "cta": "Go to the form"
+      }
+    },
+    "form": {
+      "eyebrow": "THE FORM",
+      "title": "Reservation request",
+      "note": "This is a request rather than a confirmed booking. We will reply by phone or WhatsApp to confirm it.",
+      "name": "Your name",
+      "phone": "Phone number",
+      "party": "Number of guests",
+      "date": "Preferred date",
+      "time": "Preferred time",
+      "notes": "Anything we should know",
+      "notesHint": "Allergies, the upstairs parlour, a special occasion, and so on. Optional.",
+      "submit": "Send reservation request",
+      "sending": "Sending",
+      "successWhatsapp": "Thank you. WhatsApp is now open with your details ready to go. Please tap Send there so it reaches us.",
+      "successBoth": "Thank you. A copy has reached us by email, and WhatsApp is now open with your details ready to go. Please tap Send there too, so it reaches us both ways.",
+      "errorRequired": "Please fill in your name, phone number, number of guests, date and time before sending."
+    }
+  },
   "footer": {
     "about": "A dim sum house and tea room in a restored pre-war shophouse on Lebuh Melayu, George Town, Penang. Listed in the MICHELIN Guide.",
     "explore": "Explore",
@@ -514,6 +556,7 @@ window.BTTH.lang["en"] = {
     "followUs": "Follow us",
     "hours": "Hours",
     "rights": "All rights reserved.",
+    "createdBy": "Created by BBMW0 Technologies.",
     "madeNote": "Website content is editable by the owner, see the guides supplied with this site.",
     "facebook": "Bao Teck Tea House on Facebook",
     "instagram": "Bao Teck Tea House on Instagram",

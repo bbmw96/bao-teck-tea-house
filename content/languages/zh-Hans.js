@@ -34,6 +34,7 @@ window.BTTH.lang["zh-Hans"] = {
     "story": "我们的故事",
     "gallery": "相册",
     "visit": "来访指南",
+    "reserve": "订位",
     "openMenu": "打开菜单",
     "closeMenu": "关闭菜单",
     "toggleTheme": "切换浅色与深色模式",
@@ -466,8 +467,8 @@ window.BTTH.lang["zh-Hans"] = {
     },
     "booking": {
       "title": "订位",
-      "body": "我们接受电话订位。周末与公共假期常常客满，没订位往往需要在门口排队。若您想包下楼上的厅堂宴客，请提前来电，那需要事先安排。",
-      "cta": "致电订位"
+      "body": "您可以透过 WhatsApp、订位表格或电话订位，哪种方便就用哪种。周末与公共假期常常客满，没订位往往需要在门口排队。若您想包下楼上的厅堂宴客，请提前来电，那需要事先安排。",
+      "cta": "立即订位"
     },
     "faq": {
       "title": "来之前",
@@ -507,6 +508,47 @@ window.BTTH.lang["zh-Hans"] = {
       }
     }
   },
+  "reserve": {
+    "meta": {
+      "title": "订位",
+      "description": "透过 WhatsApp 或简短表格，预订包德馆的座位。我们会亲自回覆确认。"
+    },
+    "hero": {
+      "eyebrow": "订位",
+      "title": "您想怎么订位？",
+      "lead": "两种方式都能直接联系到我们，并会获得亲自回覆。请选择您方便的方式。"
+    },
+    "choice": {
+      "whatsapp": {
+        "title": "透过 WhatsApp 留言",
+        "body": "用您自己的话告诉我们。适合快速询问，或想顺便提问的时候。",
+        "cta": "打开 WhatsApp",
+        "message": "您好，包德馆，我想订一张桌子。"
+      },
+      "form": {
+        "title": "填写表格",
+        "body": "填写一次即可，资料会同时透过 WhatsApp 与电邮送达我们。",
+        "cta": "前往表格"
+      }
+    },
+    "form": {
+      "eyebrow": "订位表格",
+      "title": "订位申请",
+      "note": "这是一项申请，并非确认订位。我们会致电或透过 WhatsApp 回覆确认。",
+      "name": "您的姓名",
+      "phone": "电话号码",
+      "party": "用餐人数",
+      "date": "预定日期",
+      "time": "预定时间",
+      "notes": "有什么需要我们留意的",
+      "notesHint": "过敏、楼上厅堂、特别场合等等，此项非必填。",
+      "submit": "送出订位申请",
+      "sending": "正在送出",
+      "successWhatsapp": "谢谢您。WhatsApp 已为您开启，资料已备妥，请在当中点击发送，讯息才会送到我们这里。",
+      "successBoth": "谢谢您。电邮副本已送达我们，WhatsApp 也已为您开启，资料已备妥。请在当中也点击发送，讯息才会以两种方式都送到我们这里。",
+      "errorRequired": "请先填妥姓名、电话号码、用餐人数、日期与时间，再送出。"
+    }
+  },
   "footer": {
     "about": "位于槟城乔治市马来街一栋修复后的战前老店屋，是一间点心馆，也是一间茶室。获米其林指南推荐。",
     "explore": "浏览",
@@ -514,6 +556,7 @@ window.BTTH.lang["zh-Hans"] = {
     "followUs": "关注我们",
     "hours": "营业时间",
     "rights": "版权所有。",
+    "createdBy": "网站由 BBMW0 Technologies 制作。",
     "madeNote": "本网站内容可由店主自行编辑，详见随本网站附上的操作指南。",
     "facebook": "包德馆的脸书主页",
     "instagram": "包德馆的 Instagram",

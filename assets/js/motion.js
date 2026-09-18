@@ -427,11 +427,17 @@ const Scroll = {
 
 /* ==========================================================================
    13. COUNT UP
+   The numbers themselves are built once by site.js, but exactly when that
+   happens depends on whether the language engine had already signalled
+   ready at that moment: sometimes the build is immediate, sometimes it
+   waits a tick for that signal. This effect cannot assume it has won that
+   race, so rather than looking for the numbers only once, at the moment
+   this script happens to run, it looks again on the same ready signals the
+   rest of the page already relies on elsewhere in this file. Finding the
+   same numbers twice is harmless, since each one is marked the first time
+   it is found and never revisited after that.
    ========================================================================== */
 (function countUp() {
-  const nums = document.querySelectorAll('[data-count]');
-  if (!nums.length) return;
-
   const animate = el => {
     const target = parseFloat(el.dataset.count);
     const suffix = el.dataset.countSuffix || '';
@@ -446,10 +452,25 @@ const Scroll = {
     rAF(step);
   };
 
-  const io = new IntersectionObserver((es, obs) => {
-    es.forEach(e => { if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); } });
-  }, { threshold: 0.45 });
-  nums.forEach(el => io.observe(el));
+  let io = null;
+  const watch = () => {
+    const nums = document.querySelectorAll('[data-count]:not([data-counted])');
+    if (!nums.length) return;
+    if ('IntersectionObserver' in window) {
+      if (!io) io = new IntersectionObserver((es, obs) => {
+        es.forEach(e => { if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); } });
+      }, { threshold: 0.45 });
+      nums.forEach(el => { el.setAttribute('data-counted', ''); io.observe(el); });
+    } else {
+      // no on-screen detector available: count straight away rather than
+      // leave the number stuck at zero forever
+      nums.forEach(el => { el.setAttribute('data-counted', ''); animate(el); });
+    }
+  };
+
+  watch();
+  document.addEventListener('site:ready', watch);
+  document.addEventListener('i18n:changed', () => setTimeout(watch, 60));
 })();
 
 /* ==========================================================================
