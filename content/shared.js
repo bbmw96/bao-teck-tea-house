@@ -1,4 +1,19 @@
-/* TEST FILE HEADER - not the real format, fine for this throwaway test call */
+/* ====================================================================
+   SHARED DETAILS
+   Prices, phone, WhatsApp, address, opening hours, photo filenames.
+   The SAME in every language. Change them once, here.
+   ====================================================================
+
+   OWNER: edit the words between the quote marks below.
+   Do NOT change the lines above the opening brace, or the very last line.
+
+   Change only the text on the RIGHT of each colon:
+
+       "title": "Change these words, not the ones on the left",
+
+   Keep the quote marks. Keep the comma at the end of the line.
+   ==================================================================== */
+
 window.BTTH = window.BTTH || {};
 window.BTTH.lang = window.BTTH.lang || {};
 window.BTTH.shared = {
@@ -76,20 +91,20 @@ window.BTTH.shared = {
   },
   "brand": {
     "nameLatin": "Bao Teck Tea House",
-    "nameChinese": "\u5305\u5fb7\u9928",
-    "nameChineseTrad": "\u5305\u5fb7\u9928",
+    "nameChinese": "包德館",
+    "nameChineseTrad": "包德館",
     "established": 2020,
     "parentCompany": "Ming Xiang Tai",
-    "parentCompanyChinese": "\u540d\u9999\u6cf0",
-    "logoGlyph": "\u5305",
-    "nameChineseSimp": "\u5305\u5fb7\u9986",
-    "_name_note": "The carved sign above the door uses the TRADITIONAL form \u5305\u5fb7\u9928. The simplified form \u5305\u5fb7\u9986 is only used in the Mandarin edition of the site.",
-    "cityChinese": "\u6ab3\u57ce",
-    "legalName": "Ming Xiang Tai Ethnic Cuisines Sdn. Bhd.",
+    "parentCompanyChinese": "名香泰",
+    "logoGlyph": "包",
+    "nameChineseSimp": "包德馆",
+    "_name_note": "The carved sign above the door uses the TRADITIONAL form 包德館. The simplified form 包德馆 is only used in the Mandarin edition of the site.",
+    "cityChinese": "檳城",
+    "legalName": "Ming Xiang Tai Ethn ic Cuisines Sdn. Bhd.",
     "formerName": "Ming Xiang Tai Pastry Delights Sdn. Bhd.",
     "registrationNo": "201301032930 (1062759-V)",
-    "mottoRight": "\u8ca8\u771f\u50f9\u5be6",
-    "mottoLeft": "\u7ae5\u53df\u7121\u6b3a",
+    "mottoRight": "貨真價實",
+    "mottoLeft": "童叟無欺",
     "_motto_note": "The two vertical inscriptions carved on the sign. A traditional pair of merchant pledges: genuine goods at honest prices, and never cheating anyone, young or old.",
     "logoFile": "",
     "_logoFile_note": "OWNER: the website shows your shop's name set in type until you add your real logo. To switch on the real one: save the file into 01-WEBSITE/images/brand/, then put its file name here between the quote marks (for example \"logo.svg\" or \"logo.png\"). A see-through PNG or an SVG both work best. Leave this blank and the site keeps showing the name in type, which is deliberate: it never invents a logo of its own. See GUIDE 6 in 03-HOW-TO-GUIDES for the full walk-through."
@@ -111,7 +126,7 @@ window.BTTH.shared = {
         "price": 23.8,
         "unit": 4,
         "image": "images/dishes/crystal-seafood-dumpling.jpg",
-        "glyph": "\u9903",
+        "glyph": "餃",
         "tags": [
           "chef",
           "seafood"
@@ -123,7 +138,7 @@ window.BTTH.shared = {
         "price": 9.8,
         "unit": 3,
         "image": "images/dishes/prawn-dumpling.jpg",
-        "glyph": "\u8766",
+        "glyph": "蝦",
         "tags": [
           "chef",
           "seafood"
@@ -135,7 +150,7 @@ window.BTTH.shared = {
         "price": 8.8,
         "unit": 3,
         "image": "images/dishes/siew-mai.jpg",
-        "glyph": "\u71d2",
+        "glyph": "燒",
         "tags": [
           "chef"
         ]
@@ -146,7 +161,7 @@ window.BTTH.shared = {
         "price": 8.8,
         "unit": 3,
         "image": "images/dishes/snowy-char-siew-bun.jpg",
-        "glyph": "\u5305",
+        "glyph": "包",
         "tags": [
           "chef"
         ]
@@ -157,7 +172,7 @@ window.BTTH.shared = {
         "price": 8.8,
         "unit": 3,
         "image": "images/dishes/egg-tart.jpg",
-        "glyph": "\u64bb",
+        "glyph": "撻",
         "tags": [
           "chef",
           "sweet"
@@ -169,7 +184,7 @@ window.BTTH.shared = {
         "price": 9.8,
         "unit": 3,
         "image": "images/dishes/spinach-prawn-dumpling.jpg",
-        "glyph": "\u83e0",
+        "glyph": "菠",
         "tags": [
           "seafood"
         ]
@@ -177,10 +192,10 @@ window.BTTH.shared = {
       {
         "id": "beancurd-sheet-roll",
         "cat": "steamed",
-        "price": 9.0,
+        "price": 9,
         "unit": 3,
         "image": "images/dishes/beancurd-sheet-roll.jpg",
-        "glyph": "\u5377",
+        "glyph": "卷",
         "tags": []
       },
       {
@@ -189,7 +204,7 @@ window.BTTH.shared = {
         "price": 8.8,
         "unit": 6,
         "image": "images/dishes/golden-radish-cake.jpg",
-        "glyph": "\u7cd5",
+        "glyph": "糕",
         "tags": []
       },
       {
@@ -198,7 +213,7 @@ window.BTTH.shared = {
         "price": null,
         "unit": 3,
         "image": "images/dishes/money-bag-dumpling.jpg",
-        "glyph": "\u888b",
+        "glyph": "袋",
         "tags": []
       },
       {
@@ -207,7 +222,7 @@ window.BTTH.shared = {
         "price": 8.8,
         "unit": 3,
         "image": "images/dishes/prawn-roll.jpg",
-        "glyph": "\u9165",
+        "glyph": "酥",
         "tags": [
           "seafood"
         ]
@@ -218,7 +233,7 @@ window.BTTH.shared = {
         "price": 8.8,
         "unit": 1,
         "image": "images/dishes/phoenix-ball.jpg",
-        "glyph": "\u9cf3",
+        "glyph": "鳳",
         "tags": [
           "chef"
         ]
@@ -229,7 +244,7 @@ window.BTTH.shared = {
         "price": null,
         "unit": 3,
         "image": "images/dishes/taro-puff.jpg",
-        "glyph": "\u828b",
+        "glyph": "芋",
         "tags": [
           "chef"
         ]
@@ -240,7 +255,7 @@ window.BTTH.shared = {
         "price": 8.8,
         "unit": 3,
         "image": "images/dishes/sesame-ball.jpg",
-        "glyph": "\u714e",
+        "glyph": "煎",
         "tags": [
           "sweet"
         ]
@@ -248,10 +263,10 @@ window.BTTH.shared = {
       {
         "id": "steamed-stuffed-bun",
         "cat": "buns",
-        "price": 18.0,
+        "price": 18,
         "unit": 1,
         "image": "images/dishes/steamed-stuffed-bun.jpg",
-        "glyph": "\u5927",
+        "glyph": "大",
         "tags": [
           "chef"
         ]
@@ -262,7 +277,7 @@ window.BTTH.shared = {
         "price": null,
         "unit": 3,
         "image": "images/dishes/ko-cha-siew-pao.jpg",
-        "glyph": "\u53c9",
+        "glyph": "叉",
         "tags": []
       },
       {
@@ -271,7 +286,7 @@ window.BTTH.shared = {
         "price": 16.8,
         "unit": 1,
         "image": "images/dishes/prawn-dumpling-noodle.jpg",
-        "glyph": "\u9eb5",
+        "glyph": "麵",
         "tags": [
           "seafood"
         ]
@@ -282,7 +297,7 @@ window.BTTH.shared = {
         "price": null,
         "unit": 1,
         "image": "images/dishes/mystery-garden.jpg",
-        "glyph": "\u5712",
+        "glyph": "園",
         "tags": [
           "veg",
           "sweet"
@@ -291,10 +306,10 @@ window.BTTH.shared = {
       {
         "id": "grand-high-tea",
         "cat": "sets",
-        "price": 34.0,
+        "price": 34,
         "unit": 1,
         "image": "images/dishes/grand-high-tea.jpg",
-        "glyph": "\u8317",
+        "glyph": "茗",
         "tags": [
           "chef"
         ]
@@ -303,47 +318,47 @@ window.BTTH.shared = {
   },
   "teas": {
     "_note": "Chinese teas were published from RM36 per pot; English teas RM38 per pot; bringing your own tea leaves was RM5 per person. UPDATE THESE.",
-    "byoCorkage": 5.0,
+    "byoCorkage": 5,
     "items": [
       {
         "id": "big-red-robe",
-        "price": 36.0,
+        "price": 36,
         "origin": "chinese",
-        "native": "\u5927\u7ea2\u888d"
+        "native": "大红袍"
       },
       {
         "id": "big-leaf-2018",
-        "price": 36.0,
+        "price": 36,
         "origin": "chinese",
-        "native": "\u53e4\u97f5"
+        "native": "古韵"
       },
       {
         "id": "white-shoumei",
-        "price": 36.0,
+        "price": 36,
         "origin": "chinese",
-        "native": "\u5bff\u7709"
+        "native": "寿眉"
       },
       {
         "id": "oolong-yanyun",
-        "price": 36.0,
+        "price": 36,
         "origin": "chinese",
-        "native": "\u5ca9\u97f5"
+        "native": "岩韵"
       },
       {
         "id": "liubao-2008",
-        "price": 36.0,
+        "price": 36,
         "origin": "chinese",
-        "native": "\u516d\u5821"
+        "native": "六堡"
       },
       {
         "id": "earl-grey",
-        "price": 38.0,
+        "price": 38,
         "origin": "english",
         "native": "Earl Grey"
       },
       {
         "id": "rooibos",
-        "price": 38.0,
+        "price": 38,
         "origin": "english",
         "native": "Rooibos"
       }
@@ -353,62 +368,62 @@ window.BTTH.shared = {
     {
       "image": "images/gallery/gallery-01.jpg",
       "captionKey": "gallery.items.moss",
-      "glyph": "\u82d4"
+      "glyph": "苔"
     },
     {
       "image": "images/gallery/gallery-02.jpg",
       "captionKey": "gallery.items.airwell",
-      "glyph": "\u4e95"
+      "glyph": "井"
     },
     {
       "image": "images/gallery/gallery-03.jpg",
       "captionKey": "gallery.items.tiles",
-      "glyph": "\u78da"
+      "glyph": "磚"
     },
     {
       "image": "images/gallery/gallery-04.jpg",
       "captionKey": "gallery.items.staircase",
-      "glyph": "\u68af"
+      "glyph": "梯"
     },
     {
       "image": "images/gallery/gallery-05.jpg",
       "captionKey": "gallery.items.upperRoom",
-      "glyph": "\u6a13"
+      "glyph": "樓"
     },
     {
       "image": "images/gallery/gallery-06.jpg",
       "captionKey": "gallery.items.cabinets",
-      "glyph": "\u6ac3"
+      "glyph": "櫃"
     },
     {
       "image": "images/gallery/gallery-07.jpg",
       "captionKey": "gallery.items.teaCounter",
-      "glyph": "\u8336"
+      "glyph": "茶"
     },
     {
       "image": "images/gallery/gallery-08.jpg",
       "captionKey": "gallery.items.steamer",
-      "glyph": "\u84b8"
+      "glyph": "蒸"
     },
     {
       "image": "images/gallery/gallery-09.jpg",
       "captionKey": "gallery.items.facade",
-      "glyph": "\u9580"
+      "glyph": "門"
     },
     {
       "image": "images/gallery/gallery-10.jpg",
       "captionKey": "gallery.items.pouring",
-      "glyph": "\u58fa"
+      "glyph": "壺"
     },
     {
       "image": "images/gallery/gallery-11.jpg",
       "captionKey": "gallery.items.marbleTable",
-      "glyph": "\u684c"
+      "glyph": "桌"
     },
     {
       "image": "images/gallery/gallery-12.jpg",
       "captionKey": "gallery.items.window",
-      "glyph": "\u7a97"
+      "glyph": "窗"
     }
   ],
   "images": {
