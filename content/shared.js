@@ -346,12 +346,6 @@ window.BTTH.shared = {
         "price": 38.0,
         "origin": "english",
         "native": "Rooibos"
-      },
-      {
-        "id": "zzz-removal-test-tea",
-        "price": 1.0,
-        "origin": "english",
-        "native": "Removal Test"
       }
     ]
   },
