@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Edit your website: Bao Teck Tea House</title>
+<title>Staff login: Bao Teck Tea House</title>
 <link rel="icon" href="../images/brand/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500&family=Noto+Sans+TC:wght@400;500&family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Thai:wght@400;500&family=Noto+Sans+Tamil:wght@400;500&display=swap">
 
-<!-- The content loads as scripts, so this editor works even when you
-     simply double-click it. No server needed. -->
+<!-- The content loads as scripts, so the editor works the moment this page
+     opens, whether that is on your own computer or on the live website. -->
 <script src="../content/shared.js"></script>
 <script src="../content/languages/en.js"></script>
 <script src="../content/languages/ms.js"></script>
@@ -20,6 +20,9 @@
 <script src="../content/languages/ar.js"></script>
 <script src="../content/languages/th.js"></script>
 <script src="../content/languages/ta.js"></script>
+
+<!-- Real sign-in and real publishing, both checked on a server, not in this page. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
 <style>
   :root{
@@ -48,8 +51,11 @@
   button{font:inherit;font-size:.84rem;font-weight:600;padding:.55rem 1.05rem;border-radius:999px;
          border:1px solid transparent;cursor:pointer;background:var(--jade);color:#f7f2e8;min-height:40px}
   button:hover{filter:brightness(1.14)}
+  button:disabled{opacity:.45;cursor:not-allowed;filter:none}
   button.ghost{background:transparent;color:#f7f2e8;border-color:rgba(255,255,255,.35)}
   button.gold{background:var(--gold);color:#fff}
+  button.danger{background:#fff;color:var(--warn);border-color:var(--warn)}
+  button.small{padding:.35rem .8rem;font-size:.78rem;min-height:32px}
   button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   .bar{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center}
   .tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem}
@@ -61,10 +67,14 @@
   .flag strong{color:var(--warn)}
   .status{font-size:.8rem;min-height:1.2em;opacity:.9}
   .status.ok{color:#9fe3c0}
+  .status.err{color:#ffb4a3}
   .imgrow{display:flex;gap:.9rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
   .imgrow img{width:74px;height:56px;object-fit:cover;border-radius:6px;border:1px solid var(--line);flex:none;background:#eee}
   .imgrow .meta{flex:1;min-width:0}
   .imgrow code{font-size:.75rem;color:var(--muted);word-break:break-all;display:block}
+  .itemrow{border:1px solid var(--line);border-radius:8px;padding:.8rem .9rem;margin-bottom:.7rem;background:#fffdf8}
+  .itemrow .top{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.5rem}
+  .itemrow .top strong{font-size:.86rem}
   .steps{counter-reset:s;padding-left:0;list-style:none;margin:.6rem 0}
   .steps li{counter-increment:s;position:relative;padding-left:2.1rem;margin-bottom:.75rem;font-size:.88rem}
   .steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:1.55rem;height:1.55rem;
@@ -76,19 +86,49 @@
   [lang^="zh"] textarea,[lang^="zh"] input{font-family:"Noto Sans SC","Noto Sans TC",sans-serif}
   footer{padding:2rem 1.4rem;text-align:center;color:var(--muted);font-size:.8rem}
   .count{background:var(--gold);color:#fff;border-radius:999px;padding:.05rem .5rem;font-size:.72rem;font-weight:700}
+
+  #lock{position:fixed;inset:0;z-index:100;background:var(--jade);color:#f7f2e8;
+        display:flex;align-items:center;justify-content:center;padding:1.4rem}
+  #lock[hidden]{display:none}
+  .lockbox{background:var(--panel);color:var(--ink);border-radius:14px;padding:2rem 1.8rem;
+           max-width:23rem;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+  .lockbox h2{margin:0 0 .3rem;font-size:1.15rem;color:var(--jade)}
+  .lockbox p{margin:0 0 1.1rem;color:var(--muted);font-size:.86rem}
+  .lockbox input{margin-bottom:.7rem}
+  .lockbox button{width:100%}
+  .lockerr{color:var(--warn);font-size:.82rem;min-height:1.2em;margin:-.3rem 0 .6rem}
+  .whoami{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.12);
+          border-radius:999px;padding:.25rem .7rem .25rem .5rem;font-size:.78rem}
+  .whoami .dot{width:.5rem;height:.5rem;border-radius:50%;background:#9fe3c0}
 </style>
 </head>
 <body>
 
+<div id="lock" role="dialog" aria-modal="true" aria-labelledby="lock-h">
+  <div class="lockbox">
+    <h2 id="lock-h">Staff sign-in</h2>
+    <p>Type your password. The owner and the manager each have their own; the
+       page works out who you are from the password itself.</p>
+    <label for="lock-pw">Password</label>
+    <input id="lock-pw" type="password" autocomplete="current-password">
+    <p class="lockerr" id="lock-err" role="alert"></p>
+    <button type="button" id="lock-go">Sign in</button>
+  </div>
+</div>
+
+<div id="app" hidden>
+
 <header>
   <div>
     <h1>Edit your website</h1>
-    <p>Bao Teck Tea House &mdash; nothing here can break the site</p>
+    <p>Bao Teck Tea House &mdash; changes here go live on their own, within about a minute</p>
   </div>
   <div class="bar">
+    <span class="whoami" id="whoami" hidden><span class="dot"></span><span id="whoami-text"></span></span>
     <span class="status" id="status"></span>
+    <button class="ghost" id="signout" type="button">Sign out</button>
     <button class="ghost" id="reload" type="button">Start again</button>
-    <button class="gold" id="save" type="button">Save my changes <span class="count" id="dirty">0</span></button>
+    <button class="gold" id="save" type="button">Publish my changes <span class="count" id="dirty">0</span></button>
   </div>
 </header>
 
@@ -96,9 +136,10 @@
 
   <div class="flag">
     <strong>How this works.</strong> Change anything below, then press
-    <em>Save my changes</em>. Your browser downloads the updated file or files.
-    Copy each one back into the website folder, replacing the old one of the
-    same name. That is the whole process. No password, no server, no database.
+    <em>Publish my changes</em>. There is nothing to download and nothing to
+    copy anywhere: your sign-in decides what you are allowed to change, and a
+    small automatic process puts the approved change straight onto the live
+    website. It usually appears within about a minute.
   </div>
 
   <div class="tabs" role="tablist" id="tabs"></div>
@@ -166,17 +207,28 @@
     </div>
   </section>
 
-  <!-- ═══════════ PRICES ═══════════ -->
+  <!-- ═══════════ MENU ═══════════ -->
   <section class="panel" id="p-prices" role="tabpanel" hidden>
     <div class="card">
-      <h2>Prices</h2>
+      <h2>Dim sum menu</h2>
       <div class="flag"><strong>Every price here is out of date.</strong> They were
         published by food writers in 2020 and 2021. Please set your real prices
         before the site goes live. Leave a box empty to show
         &ldquo;please ask in store&rdquo; instead of a number.</div>
-      <p class="hint">Prices are in Malaysian Ringgit and update in all seven languages together.</p>
-      <h3>Dim sum</h3><div id="prices"></div>
-      <h3>Tea</h3><div id="teaprices"></div>
+      <p class="hint">Prices are in Malaysian Ringgit and update in all seven languages together.
+        A new dish starts with just an English name; visit the Words tab afterwards to add
+        the other six languages whenever you are ready &mdash; the site will show the English
+        name in the meantime rather than leaving a gap.</p>
+      <div id="prices"></div>
+      <button type="button" class="small" id="add-dish">+ Add a new dish</button>
+    </div>
+    <div class="card">
+      <h2>Tea</h2>
+      <div id="teaprices"></div>
+      <button type="button" class="small" id="add-tea">+ Add a tea</button>
+      <h3>Bring your own tea</h3>
+      <label for="byo">Fee per person</label>
+      <input id="byo" type="number" step="0.10" min="0">
     </div>
   </section>
 
@@ -204,26 +256,58 @@
   <section class="panel" id="p-photos" role="tabpanel" hidden>
     <div class="card">
       <h2>Your photographs</h2>
-      <p class="hint">Photos are swapped as files, which is simpler and safer than
-        uploading them through a form.</p>
+      <p class="hint">Photos are still swapped as files, which is simpler and safer than
+        uploading them through a form &mdash; only the fixed photo slots below (hero images,
+        the dishes above, the gallery) exist to point at.</p>
       <ol class="steps">
         <li>Find the photo you want to change in the list below and note its file name.</li>
         <li>Rename your own photo to exactly that name, including the <code>.jpg</code> ending.</li>
-        <li>Copy it into the matching folder, replacing the placeholder.</li>
-        <li>Refresh the website. Your photo is live.</li>
+        <li>Copy it into the matching folder in your website files, replacing the placeholder.</li>
+        <li>Refresh the website. Your photo is live within a minute or so.</li>
       </ol>
       <div class="flag">Aim for about 1600 pixels wide. Larger than that only makes
         the site slower to load on a phone.</div>
       <div id="photos"></div>
     </div>
+    <div class="card">
+      <h2>Gallery</h2>
+      <p class="hint">Add a new slot here, then follow the steps above to drop the actual
+        photo file in. Deleting only removes it from the gallery list, never your files.</p>
+      <div id="gallerylist"></div>
+      <button type="button" class="small" id="add-gallery">+ Add a gallery photo</button>
+    </div>
+  </section>
+
+  <!-- ═══════════ ACCOUNT ═══════════ -->
+  <section class="panel" id="p-account" role="tabpanel" hidden>
+    <div class="card">
+      <h2>Your password</h2>
+      <p class="hint">This changes only your own sign-in. You cannot see or change the
+        other person's password from here &mdash; ask whoever built this site if that is
+        ever needed.</p>
+      <label for="f-newpw">New password</label>
+      <input id="f-newpw" type="text" autocomplete="new-password" placeholder="Type a new password">
+      <button type="button" class="small" id="changepw" style="margin-top:.6rem">Update my password</button>
+      <p class="hint" id="pw-status"></p>
+    </div>
   </section>
 
 </div>
 
-<footer>This editor runs entirely inside your own browser. Nothing is uploaded anywhere.</footer>
+<footer>Signed-in changes publish automatically. Nothing here is ever visible to visitors who have not signed in.</footer>
+
+</div>
 
 <script>
 'use strict';
+
+/* ── CONFIGURATION ──────────────────────────────────────────────── */
+const SUPABASE_URL = 'https://cmioynnedymfxiawavgv.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_VchBstt_TBayM2EX-gu5FQ_1RGR_pqx';
+const PUBLISH_URL = SUPABASE_URL + '/functions/v1/publish';
+const STAFF_EMAILS = ['owner@staff.invalid', 'manager@staff.invalid'];
+
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const LANGS = [
   { code:'en',      name:'English',            html:'en'      },
@@ -237,31 +321,103 @@ const LANGS = [
 const DAYS = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
 
 const state = { shared:null, langs:{}, current:'en', dirty:new Set() };
+const session = { role:null, name:null, accessToken:null };
 const $ = s => document.querySelector(s);
 
-function say(msg, ok){ const n=$('#status'); n.textContent=msg; n.className='status'+(ok?' ok':''); }
+function say(msg, kind){
+  const n=$('#status'); n.textContent=msg;
+  n.className='status'+(kind?' '+kind:'');
+}
 function markDirty(k){ state.dirty.add(k); $('#dirty').textContent = state.dirty.size; }
 function get(o,p){ return p.split('.').reduce((a,k)=> (a&&k in a)?a[k]:undefined, o); }
 function set(o,p,v){ const q=p.split('.'), last=q.pop(); q.reduce((a,k)=> (a[k]=a[k]||{}), o)[last]=v; }
 const clone = o => JSON.parse(JSON.stringify(o));
+const isOwner = () => session.role === 'owner';
+
+function slugify(text){
+  return (text||'').toString().toLowerCase()
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'') || ('item-'+Date.now());
+}
+
+/* ── SIGN IN / SIGN OUT ─────────────────────────────────────────── */
+async function tryUnlock(password){
+  if (!password) return false;
+  for (const email of STAFF_EMAILS){
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (!error && data && data.session) return true;
+  }
+  return false;
+}
+
+async function loadProfile(){
+  const { data:userData } = await sb.auth.getUser();
+  if (!userData || !userData.user) return false;
+  const { data:profile, error } = await sb.from('profiles').select('role,display_name').eq('id', userData.user.id).single();
+  if (error || !profile) return false;
+  session.role = profile.role;
+  session.name = profile.display_name;
+  const { data:sessData } = await sb.auth.getSession();
+  session.accessToken = sessData && sessData.session ? sessData.session.access_token : null;
+  return true;
+}
+
+async function afterSignIn(){
+  const ok = await loadProfile();
+  if (!ok){ $('#lock-err').textContent = 'Signed in, but could not confirm who you are. Try again.'; await sb.auth.signOut(); return; }
+  $('#lock').hidden = true;
+  $('#app').hidden = false;
+  const who = $('#whoami'); who.hidden = false;
+  $('#whoami-text').textContent = 'Signed in: ' + session.name;
+  applyRoleRestrictions();
+  load();
+}
+
+$('#lock-go').onclick = async () => {
+  $('#lock-err').textContent = '';
+  const pw = $('#lock-pw').value;
+  $('#lock-go').disabled = true;
+  const ok = await tryUnlock(pw);
+  $('#lock-go').disabled = false;
+  if (!ok){ $('#lock-err').textContent = 'That password is not recognised. Try again.'; return; }
+  await afterSignIn();
+};
+$('#lock-pw').addEventListener('keydown', e => { if (e.key === 'Enter') $('#lock-go').click(); });
+
+$('#signout').onclick = async () => {
+  if (state.dirty.size && !confirm('You have unpublished changes. Sign out anyway?')) return;
+  await sb.auth.signOut();
+  location.reload();
+};
+
+(async function checkExistingSession(){
+  const { data } = await sb.auth.getSession();
+  if (data && data.session) await afterSignIn();
+})();
+
+function applyRoleRestrictions(){
+  document.querySelectorAll('[data-owner-only]').forEach(el=>{
+    el.disabled = !isOwner();
+    el.title = isOwner() ? '' : 'Only the owner can do this.';
+  });
+}
 
 /* ── LOAD ───────────────────────────────────────────────────────── */
 function load(){
   if (!window.BTTH || !window.BTTH.shared || !window.BTTH.lang.en) {
-    say('Could not find the content files. Make sure the admin folder sits inside the website folder.');
+    say('Could not find the content files. Make sure this page sits inside the website folder.', 'err');
     return;
   }
   state.shared = clone(window.BTTH.shared);
   LANGS.forEach(l => { state.langs[l.code] = clone(window.BTTH.lang[l.code]); });
   state.dirty.clear(); $('#dirty').textContent = '0';
 
-  buildTabs(); bindShared(); buildHours(); buildPrices(); buildLangPicker(); buildPhotos();
-  say('Ready. Make your changes, then press Save.', true);
+  buildTabs(); bindShared(); buildHours(); buildPrices(); buildLangPicker(); buildPhotos(); buildGallery();
+  say('Ready. Make your changes, then press Publish.', 'ok');
 }
 
 /* ── TABS ───────────────────────────────────────────────────────── */
 function buildTabs(){
-  const defs = [['p-details','Contact & hours'],['p-prices','Prices'],['p-words','Words'],['p-photos','Photos']];
+  const defs = [['p-details','Contact & hours'],['p-prices','Menu & tea'],['p-words','Words'],['p-photos','Photos'],['p-account','Account']];
   const bar = $('#tabs'); bar.replaceChildren();
   defs.forEach(([id,label],i)=>{
     const b=document.createElement('button');
@@ -327,15 +483,27 @@ function buildHours(){
   });
 }
 
-/* ── PRICES ─────────────────────────────────────────────────────── */
+/* ── MENU ITEMS (dishes) ────────────────────────────────────────── */
+function dishName(id){ return get(state.langs.en,'menu.items.'+id+'.name') || id; }
+
 function buildPrices(){
-  const en=state.langs.en;
   const m=$('#prices'); m.replaceChildren();
   state.shared.menu.items.forEach(item=>{
-    const name=get(en,'menu.items.'+item.id+'.name')||item.id;
-    const r=document.createElement('div'); r.className='row'; r.style.marginBottom='.35rem';
+    const row=document.createElement('div'); row.className='itemrow';
+    const top=document.createElement('div'); top.className='top';
+    const name=document.createElement('strong'); name.textContent=dishName(item.id);
+    const del=document.createElement('button'); del.type='button'; del.className='small danger';
+    del.textContent='Delete this dish'; del.setAttribute('data-owner-only','');
+    del.onclick=()=>{
+      if(!isOwner()) return;
+      if(!confirm('Remove "'+dishName(item.id)+'" from the menu? This cannot be undone once published.')) return;
+      deleteMenuItem(item.id);
+    };
+    top.append(name,del); row.appendChild(top);
+
+    const r=document.createElement('div'); r.className='row';
     const a=document.createElement('div');
-    const la=document.createElement('label'); la.textContent=name; la.htmlFor='pr-'+item.id;
+    const la=document.createElement('label'); la.textContent='Price (RM)'; la.htmlFor='pr-'+item.id;
     const ia=document.createElement('input'); ia.type='number'; ia.step='0.10'; ia.min='0';
     ia.id='pr-'+item.id; ia.value = item.price===null ? '' : item.price;
     ia.placeholder='leave empty for "please ask in store"';
@@ -346,24 +514,95 @@ function buildPrices(){
     const ib=document.createElement('input'); ib.type='number'; ib.min='1'; ib.id='un-'+item.id; ib.value=item.unit;
     ib.oninput=()=>{ item.unit=parseInt(ib.value,10)||1; markDirty('shared'); };
     b.append(lb,ib);
-    r.append(a,b); m.appendChild(r);
+    r.append(a,b); row.appendChild(r);
+    m.appendChild(row);
   });
+  applyRoleRestrictions();
 
   const tm=$('#teaprices'); tm.replaceChildren();
   state.shared.teas.items.forEach(t=>{
-    const name=get(en,'tea.items.'+t.id+'.name')||t.id;
-    const d=document.createElement('div');
-    const l=document.createElement('label'); l.textContent=name+' (per pot)'; l.htmlFor='tp-'+t.id;
+    const name=get(state.langs.en,'tea.items.'+t.id+'.name')||t.id;
+    const row=document.createElement('div'); row.className='itemrow';
+    const top=document.createElement('div'); top.className='top';
+    const nm=document.createElement('strong'); nm.textContent=name;
+    const del=document.createElement('button'); del.type='button'; del.className='small danger';
+    del.textContent='Delete this tea'; del.setAttribute('data-owner-only','');
+    del.onclick=()=>{
+      if(!isOwner()) return;
+      if(!confirm('Remove "'+name+'" from the tea list? This cannot be undone once published.')) return;
+      deleteTeaItem(t.id);
+    };
+    top.append(nm,del); row.appendChild(top);
+    const l=document.createElement('label'); l.textContent='Price per pot (RM)'; l.htmlFor='tp-'+t.id;
     const i=document.createElement('input'); i.type='number'; i.step='0.10'; i.min='0'; i.id='tp-'+t.id; i.value=t.price;
     i.oninput=()=>{ t.price=parseFloat(i.value)||0; markDirty('shared'); };
-    d.append(l,i); tm.appendChild(d);
+    row.append(l,i); tm.appendChild(row);
   });
-  const d=document.createElement('div');
-  const l=document.createElement('label'); l.textContent='Bring-your-own-tea fee, per person'; l.htmlFor='byo';
-  const i=document.createElement('input'); i.type='number'; i.step='0.10'; i.min='0'; i.id='byo';
-  i.value=state.shared.teas.byoCorkage;
-  i.oninput=()=>{ state.shared.teas.byoCorkage=parseFloat(i.value)||0; markDirty('shared'); };
-  d.append(l,i); tm.appendChild(d);
+  applyRoleRestrictions();
+
+  $('#byo').value = state.shared.teas.byoCorkage;
+  $('#byo').oninput = ()=>{ state.shared.teas.byoCorkage=parseFloat($('#byo').value)||0; markDirty('shared'); };
+}
+
+function addAllLanguageText(pathPrefix, id, englishText){
+  LANGS.forEach(l=>{
+    set(state.langs[l.code], pathPrefix+'.'+id+'.name', englishText);
+    markDirty(l.code);
+  });
+}
+function removeAllLanguageText(pathPrefix, id){
+  LANGS.forEach(l=>{
+    const dict = state.langs[l.code];
+    const parent = get(dict, pathPrefix);
+    if (parent && id in parent){ delete parent[id]; markDirty(l.code); }
+  });
+}
+
+$('#add-dish').onclick = ()=>{
+  const name = prompt('Name of the new dish (in English — add the other languages afterwards in the Words tab):');
+  if (!name) return;
+  const priceStr = prompt('Price in RM (leave blank for "please ask in store"):','');
+  const unitStr = prompt('How many pieces per order?','3');
+  const cat = state.shared.menu.categories[0];
+  const id = slugify(name);
+  if (state.shared.menu.items.some(i=>i.id===id)){ alert('A dish with that name already exists.'); return; }
+  state.shared.menu.items.push({
+    id, cat, price: priceStr ? parseFloat(priceStr) : null, unit: parseInt(unitStr,10)||1,
+    image: 'images/dishes/'+id+'.jpg', glyph: '', tags: []
+  });
+  addAllLanguageText('menu.items', id, name);
+  markDirty('shared');
+  buildPrices(); buildPhotos();
+  say('Added "'+name+'". Set its category and photo, then translate it in the Words tab when ready.', 'ok');
+};
+
+$('#add-tea').onclick = ()=>{
+  const name = prompt('Name of the new tea (in English — add the other languages afterwards in the Words tab):');
+  if (!name) return;
+  const priceStr = prompt('Price per pot in RM:','36');
+  const origin = confirm('Is this a Chinese tea? Click Cancel for an English/other tea.') ? 'chinese' : 'english';
+  const id = slugify(name);
+  if (state.shared.teas.items.some(i=>i.id===id)){ alert('A tea with that name already exists.'); return; }
+  state.shared.teas.items.push({ id, price: parseFloat(priceStr)||0, origin, native: name });
+  addAllLanguageText('tea.items', id, name);
+  markDirty('shared');
+  buildPrices();
+  say('Added "'+name+'" to the tea list.', 'ok');
+};
+
+function deleteMenuItem(id){
+  state.shared.menu.items = state.shared.menu.items.filter(i=>i.id!==id);
+  removeAllLanguageText('menu.items', id);
+  markDirty('shared');
+  buildPrices(); buildPhotos();
+  say('Removed. Press Publish to make this permanent.', 'ok');
+}
+function deleteTeaItem(id){
+  state.shared.teas.items = state.shared.teas.items.filter(i=>i.id!==id);
+  removeAllLanguageText('tea.items', id);
+  markDirty('shared');
+  buildPrices();
+  say('Removed. Press Publish to make this permanent.', 'ok');
 }
 
 /* ── WORDS ──────────────────────────────────────────────────────── */
@@ -452,9 +691,6 @@ function buildPhotos(){
     rows.push([v, k.replace(/([A-Z])/g,' $1').toLowerCase()]);
   });
   state.shared.menu.items.forEach(i=> rows.push([i.image, get(en,'menu.items.'+i.id+'.name')||i.id]));
-  state.shared.gallery.forEach((g,idx)=>{
-    rows.push([g.image, 'Gallery '+(idx+1)+': '+(get(en,g.captionKey)||'')]);
-  });
   rows.forEach(([src,label])=>{
     const r=document.createElement('div'); r.className='imgrow';
     const im=document.createElement('img'); im.src='../'+src; im.alt=''; im.loading='lazy';
@@ -465,7 +701,63 @@ function buildPhotos(){
   });
 }
 
-/* ── SAVE ───────────────────────────────────────────────────────── */
+function buildGallery(){
+  const en=state.langs.en;
+  const m=$('#gallerylist'); m.replaceChildren();
+  state.shared.gallery.forEach((g,idx)=>{
+    const row=document.createElement('div'); row.className='imgrow';
+    const im=document.createElement('img'); im.src='../'+g.image; im.alt=''; im.loading='lazy';
+    const mm=document.createElement('div'); mm.className='meta';
+    const t=document.createElement('div'); t.textContent='Gallery '+(idx+1)+': '+(get(en,g.captionKey)||'');
+    t.style.fontSize='.88rem';
+    const c=document.createElement('code'); c.textContent=g.image;
+    mm.append(t,c);
+    const del=document.createElement('button'); del.type='button'; del.className='small danger';
+    del.textContent='Delete'; del.setAttribute('data-owner-only','');
+    del.onclick=()=>{
+      if(!isOwner()) return;
+      if(!confirm('Remove this photo from the gallery list?')) return;
+      const key = g.captionKey.split('.').pop();
+      state.shared.gallery.splice(idx,1);
+      removeAllLanguageText('gallery.items', key);
+      markDirty('shared');
+      buildGallery();
+      say('Removed from the gallery list. Press Publish to make this permanent.', 'ok');
+    };
+    row.append(im,mm,del); m.appendChild(row);
+  });
+  applyRoleRestrictions();
+}
+
+$('#add-gallery').onclick = ()=>{
+  const caption = prompt('A short caption for this photo (in English — add the other languages afterwards in the Words tab):');
+  if (!caption) return;
+  const n = state.shared.gallery.length + 1;
+  const key = slugify(caption);
+  const num = String(n).padStart(2,'0');
+  state.shared.gallery.push({
+    image: 'images/gallery/gallery-'+num+'.jpg',
+    captionKey: 'gallery.items.'+key,
+    glyph: ''
+  });
+  addAllLanguageText('gallery.items', key, caption);
+  markDirty('shared');
+  buildGallery();
+  say('Added a new gallery slot. Follow the photo steps above to put the picture in place.', 'ok');
+};
+
+/* ── ACCOUNT (self-service password change) ────────────────────── */
+$('#changepw').onclick = async ()=>{
+  const pw = $('#f-newpw').value;
+  if (!pw || pw.length < 8){ $('#pw-status').textContent = 'Please use at least 8 characters.'; return; }
+  $('#pw-status').textContent = 'Updating...';
+  const { error } = await sb.auth.updateUser({ password: pw });
+  if (error){ $('#pw-status').textContent = 'Could not update: ' + error.message; return; }
+  $('#f-newpw').value = '';
+  $('#pw-status').textContent = 'Password updated. Use the new one next time you sign in.';
+};
+
+/* ── PUBLISH ────────────────────────────────────────────────────── */
 const HEAD = (title, assign) =>
 `/* ====================================================================
    ${title}
@@ -485,48 +777,61 @@ window.BTTH = window.BTTH || {};
 window.BTTH.lang = window.BTTH.lang || {};
 ${assign} = `;
 
-function download(name, text){
-  const blob=new Blob([text],{type:'text/javascript;charset=utf-8'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob); a.download=name;
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+function toBase64Utf8(str){
+  return btoa(unescape(encodeURIComponent(str)));
 }
 
-$('#save').onclick=()=>{
+$('#save').onclick = async ()=>{
   if(!state.dirty.size){ say('Nothing has changed yet.'); return; }
-  const done=[];
+  $('#save').disabled = true;
+  say('Publishing...', 'ok');
+
+  const files = [];
+  let summaryParts = [];
 
   if(state.dirty.has('shared')){
-    download('shared.js',
-      HEAD('SHARED DETAILS\n   Prices, phone, WhatsApp, address, opening hours, photo filenames.\n   The SAME in every language. Change them once, here.',
-           'window.BTTH.shared') + JSON.stringify(state.shared,null,2) + ';\n');
-    done.push('shared.js  ->  put in the content folder');
+    const text = HEAD('SHARED DETAILS\n   Prices, phone, WhatsApp, address, opening hours, photo filenames.\n   The SAME in every language. Change them once, here.',
+           'window.BTTH.shared') + JSON.stringify(state.shared,null,2) + ';\n';
+    files.push({ path:'content/shared.js', content_base64: toBase64Utf8(text) });
+    summaryParts.push('shared details');
   }
   LANGS.forEach(l=>{
     if(!state.dirty.has(l.code)) return;
     const d=state.langs[l.code];
     const name=(d._meta && d._meta.language) || l.name;
-    download(l.code+'.js',
-      HEAD(name+'  ('+l.code+')   ALL THE WORDS FOR THIS LANGUAGE',
-           'window.BTTH.lang["'+l.code+'"]') + JSON.stringify(d,null,2) + ';\n');
-    done.push(l.code+'.js  ->  put in the content/languages folder');
+    const text = HEAD(name+'  ('+l.code+')   ALL THE WORDS FOR THIS LANGUAGE',
+           'window.BTTH.lang["'+l.code+'"]') + JSON.stringify(d,null,2) + ';\n';
+    files.push({ path:'content/languages/'+l.code+'.js', content_base64: toBase64Utf8(text) });
+    summaryParts.push(name+' text');
   });
 
-  say('Downloaded: '+done.join('   |   '), true);
-  state.dirty.clear(); $('#dirty').textContent='0';
+  try{
+    const res = await fetch(PUBLISH_URL, {
+      method:'POST',
+      headers:{ 'Authorization':'Bearer '+session.accessToken, 'Content-Type':'application/json' },
+      body: JSON.stringify({ action:'edit', files, summary: summaryParts.join(', ') })
+    });
+    const out = await res.json();
+    if(!res.ok || out.error){
+      say(out.error || 'Something went wrong publishing.', 'err');
+    } else {
+      say('Published! Live on the website within about a minute.', 'ok');
+      state.dirty.clear(); $('#dirty').textContent='0';
+    }
+  } catch(err){
+    say('Could not reach the publishing service. Check your internet connection and try again.', 'err');
+  }
+  $('#save').disabled = false;
 };
 
 $('#reload').onclick=()=>{
-  if(state.dirty.size && !confirm('You have unsaved changes. Throw them away and start again?')) return;
+  if(state.dirty.size && !confirm('You have unpublished changes. Throw them away and start again?')) return;
   load();
 };
 
 window.addEventListener('beforeunload', e=>{
   if(state.dirty.size){ e.preventDefault(); e.returnValue=''; }
 });
-
-load();
 </script>
 </body>
 </html>
