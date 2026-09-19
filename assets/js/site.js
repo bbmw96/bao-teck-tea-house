@@ -225,7 +225,9 @@ const SITE = (() => {
           el('span', { 'data-copyright': '' }),
           el('span', { class: 'text-sm', 'data-i18n': 'footer.madeNote' }),
           el('a', { class: 'text-sm', href: 'https://bbmw0.com', target: '_blank',
-                    rel: 'noopener noreferrer', 'data-i18n': 'footer.createdBy' })
+                    rel: 'noopener noreferrer', 'data-i18n': 'footer.createdBy' }),
+          el('a', { class: 'text-sm', style: 'opacity:.55', href: base() + 'admin/index.html',
+                    'data-i18n': 'footer.staff' })
         ])
       ]));
   }

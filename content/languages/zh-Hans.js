@@ -557,6 +557,7 @@ window.BTTH.lang["zh-Hans"] = {
     "hours": "营业时间",
     "rights": "版权所有。",
     "createdBy": "网站由 BBMW0 Technologies 制作。",
+    "staff": "员工",
     "madeNote": "本网站内容可由店主自行编辑，详见随本网站附上的操作指南。",
     "facebook": "包德馆的脸书主页",
     "instagram": "包德馆的 Instagram",

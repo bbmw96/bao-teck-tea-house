@@ -557,6 +557,7 @@ window.BTTH.lang["en"] = {
     "hours": "Hours",
     "rights": "All rights reserved.",
     "createdBy": "Created by BBMW0 Technologies.",
+    "staff": "Staff",
     "madeNote": "Website content is editable by the owner, see the guides supplied with this site.",
     "facebook": "Bao Teck Tea House on Facebook",
     "instagram": "Bao Teck Tea House on Instagram",

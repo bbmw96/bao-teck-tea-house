@@ -557,6 +557,7 @@ window.BTTH.lang["th"] = {
     "hours": "เวลาเปิดทำการ",
     "rights": "สงวนลิขสิทธิ์",
     "createdBy": "สร้างสรรค์โดย BBMW0 Technologies",
+    "staff": "พนักงาน",
     "madeNote": "เจ้าของร้านสามารถแก้ไขเนื้อหาเว็บไซต์นี้ได้เอง ดูรายละเอียดในคู่มือที่แนบมากับเว็บไซต์",
     "facebook": "Bao Teck Tea House บนเฟซบุ๊ก",
     "instagram": "Bao Teck Tea House บนอินสตาแกรม",

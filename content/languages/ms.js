@@ -557,6 +557,7 @@ window.BTTH.lang["ms"] = {
     "hours": "Waktu operasi",
     "rights": "Hak cipta terpelihara.",
     "createdBy": "Dicipta oleh BBMW0 Technologies.",
+    "staff": "Kakitangan",
     "madeNote": "Kandungan laman web ini boleh disunting oleh pemilik, sila rujuk panduan yang disertakan bersama laman ini.",
     "facebook": "Bao Teck Tea House di Facebook",
     "instagram": "Bao Teck Tea House di Instagram",
