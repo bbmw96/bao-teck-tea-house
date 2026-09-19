@@ -100,7 +100,7 @@ window.BTTH.shared = {
     "nameChineseSimp": "包德馆",
     "_name_note": "The carved sign above the door uses the TRADITIONAL form 包德館. The simplified form 包德馆 is only used in the Mandarin edition of the site.",
     "cityChinese": "檳城",
-    "legalName": "Ming Xiang Tai Ethn ic Cuisines Sdn. Bhd.",
+    "legalName": "Ming Xiang Tai Ethnic Cuisines Sdn. Bhd.",
     "formerName": "Ming Xiang Tai Pastry Delights Sdn. Bhd.",
     "registrationNo": "201301032930 (1062759-V)",
     "mottoRight": "貨真價實",
